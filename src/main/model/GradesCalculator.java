@@ -5,6 +5,8 @@ import model.Grade;
 import java.util.ArrayList;
 import java.util.List;
 
+// !!! no class level comments
+
 public class GradesCalculator {
     private List<Grade> grades;
     private List<String> classes;

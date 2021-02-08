@@ -1,5 +1,7 @@
 package model;
 
+// !!! class level comment
+
 public class Grade {
     private double mark;
     private String assignmentName;
