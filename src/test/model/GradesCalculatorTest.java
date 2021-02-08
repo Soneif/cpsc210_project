@@ -5,6 +5,7 @@ import model.GradesCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -107,5 +108,21 @@ class GradesCalculatorTest {
         assertEquals(mathAverage, calc.calculateClassAverage("MATH 283"));
 
         assertEquals((eoscAverage + cpscAverage + mathAverage) / 3, calc.calculateOverallAverage());
+    }
+
+    @Test
+    void returnClassGradeMultipleClasses() {
+        List<Grade> match = new ArrayList<Grade>();
+        Grade grade = new Grade(97.4, "Worksheet 2", "DSCI 500");
+        calc.addGrade(grade);
+        match.add(grade);
+        grade = new Grade(4.5, "Quiz 3", "EOSC 245");
+        calc.addGrade(grade);
+        grade = new Grade(45.7, "Test", "DSCI 500");
+        calc.addGrade(grade);
+        match.add(grade);
+
+        List<Grade> grades = calc.returnClassGrades("DSCI 500");
+        assertEquals(match, grades);
     }
 }

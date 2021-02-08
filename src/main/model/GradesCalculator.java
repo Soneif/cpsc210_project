@@ -50,16 +50,15 @@ public class GradesCalculator {
      * EFFECTS: Calculates the average of all grades whose class is className
      */
     public double calculateClassAverage(String className) {
-        double sum = 0;
-        int n = 0;
+        List<Grade> gradesInClass = returnClassGrades(className);
 
-        for (Grade grade : grades) {
-            if (grade.getClassName().equals(className)) {
-                sum += grade.getMark();
-                n++;
-            }
+        double sum = 0;
+
+        for (Grade grade : gradesInClass) {
+            sum += grade.getMark();
         }
-        return sum / n;
+
+        return sum / gradesInClass.size();
     }
 
     /*
@@ -76,6 +75,21 @@ public class GradesCalculator {
         }
 
         return sum / n;
+    }
+
+    /*
+     * EFFECTS: Returns a list of Grade objects whose className matches the inputted class name.
+     */
+
+    public List<Grade> returnClassGrades(String className) {
+        List<Grade> gradesInClass = new ArrayList<Grade>();
+        for (Grade grade : grades) {
+            if (grade.getClassName().equals(className)) {
+                gradesInClass.add(grade);
+            }
+        }
+
+        return gradesInClass;
     }
 
 }
