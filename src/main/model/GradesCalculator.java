@@ -1,7 +1,5 @@
 package model;
 
-import model.Grade;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +13,8 @@ public class GradesCalculator {
      * EFFECTS: instantiates grades and classes as Arraylists
      */
     public GradesCalculator() {
-        grades = new ArrayList<Grade>();
-        classes = new ArrayList<String>();
+        grades = new ArrayList<>();
+        classes = new ArrayList<>();
     }
 
     public List<Grade> getGrades() {
@@ -84,7 +82,7 @@ public class GradesCalculator {
      */
 
     public List<Grade> returnClassGrades(String className) {
-        List<Grade> gradesInClass = new ArrayList<Grade>();
+        List<Grade> gradesInClass = new ArrayList<>();
         for (Grade grade : grades) {
             if (grade.getClassName().equals(className)) {
                 gradesInClass.add(grade);

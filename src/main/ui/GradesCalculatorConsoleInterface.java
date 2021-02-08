@@ -18,15 +18,15 @@ public class GradesCalculatorConsoleInterface {
     }
 
     private void runConsoleInterface() {
-        Boolean continueInterface = true;
-        String operation = "";
+        boolean continueInterface = true;
+        String operation;
 
         initialize();
 
         while (continueInterface) {
             printMenu();
             operation = input.nextLine().toLowerCase();
-            if (input.equals("q")) {
+            if (operation.equals("q")) {
                 continueInterface = false;
             } else {
                 processOperation(operation);

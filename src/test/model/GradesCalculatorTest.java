@@ -112,7 +112,7 @@ class GradesCalculatorTest {
 
     @Test
     void returnClassGradeMultipleClasses() {
-        List<Grade> match = new ArrayList<Grade>();
+        List<Grade> match = new ArrayList<>();
         Grade grade = new Grade(97.4, "Worksheet 2", "DSCI 500");
         calc.addGrade(grade);
         match.add(grade);
