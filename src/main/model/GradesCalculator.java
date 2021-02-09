@@ -38,10 +38,18 @@ public class GradesCalculator {
 
     /*
      * MODIFIES: this
-     * EFFECTS: Removes Grade that has the same mark, assignmentName, and className
+     * EFFECTS: Removes Grade that has the same assignmentName, and className
      */
-    public void removeGrade(Grade match) {
-        grades.remove(match);
+    public void removeGrade(String assignmentName, String className) {
+        Grade toRemove = null;
+        for (Grade grade : grades) {
+            if (grade.getClassName().equals(className)) {
+                if (grade.getAssignmentName().equals(assignmentName)) {
+                    toRemove = grade;
+                }
+            }
+        }
+        grades.remove(toRemove);
     }
 
 

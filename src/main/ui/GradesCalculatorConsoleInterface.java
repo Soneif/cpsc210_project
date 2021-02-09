@@ -5,6 +5,7 @@ import model.GradesCalculator;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 // !!! no comments yet
 
@@ -54,10 +55,10 @@ public class GradesCalculatorConsoleInterface {
     private void processOperation(String operation) {
         switch (operation) {
             case ("a"):
-                addRemoveGrade(0);
+                addGrade();
                 break;
             case ("r"):
-                addRemoveGrade(1);
+                removeGrade();
                 break;
             case ("va"):
                 viewAll();
@@ -72,9 +73,18 @@ public class GradesCalculatorConsoleInterface {
                 overallAverage();
                 break;
         }
+
     }
 
-    private void addRemoveGrade(int command) {
+    private void pause() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    private void addGrade() {
         Grade grade;
         double mark;
         String assignment;
@@ -89,12 +99,19 @@ public class GradesCalculatorConsoleInterface {
 
         grade = new Grade(mark, assignment, className);
 
-        if (command == 0) {
-            gradesCalculator.addGrade(grade);
-        } else if (command == 1) {
-            gradesCalculator.removeGrade(grade);
-        }
+        gradesCalculator.addGrade(grade);
+    }
 
+    private void removeGrade() {
+        String assignment;
+        String className;
+
+        System.out.println("Please enter the assignment name.");
+        assignment = input.nextLine();
+        System.out.println("Please enter the class name.");
+        className = input.nextLine();
+
+        gradesCalculator.removeGrade(assignment, className);
     }
 
     private void viewAll() {
@@ -104,6 +121,7 @@ public class GradesCalculatorConsoleInterface {
             System.out.println(grade);
         }
 
+        pause();
     }
 
     private void viewClass() {
@@ -116,6 +134,7 @@ public class GradesCalculatorConsoleInterface {
             System.out.println(grade);
         }
 
+        pause();
     }
 
     private void oneAverage() {
@@ -125,10 +144,14 @@ public class GradesCalculatorConsoleInterface {
         double output = gradesCalculator.calculateClassAverage(command);
 
         System.out.println(output);
+
+        pause();
     }
 
     private void overallAverage() {
         System.out.println(gradesCalculator.calculateOverallAverage());
+
+        pause();
     }
 
 }

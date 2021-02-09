@@ -38,7 +38,7 @@ class GradesCalculatorTest {
         assertTrue(output.contains(grade));
         assertEquals(1, output.size());
 
-        calc.removeGrade(grade);
+        calc.removeGrade("Test 5", "CPSC 123");
 
         assertFalse(output.contains(grade));
         assertEquals(0, output.size());
@@ -60,10 +60,11 @@ class GradesCalculatorTest {
         assertTrue(output.contains(grade2));
         assertEquals(2, output.size());
 
-        calc.removeGrade(grade1);
+        calc.removeGrade("Test 5", "CPSC 123");
 
         assertFalse(output.contains(grade1));
         assertEquals(1, output.size());
+        assertEquals(output.get(0), grade2);
     }
 
 
