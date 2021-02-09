@@ -6,7 +6,9 @@ import model.GradesCalculator;
 import java.util.List;
 import java.util.Scanner;
 
-// !!! no comments yet
+/*
+ * Console interface/application for GradesCalculator
+ */
 
 public class GradesCalculatorConsoleInterface {
 

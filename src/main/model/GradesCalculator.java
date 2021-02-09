@@ -3,7 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-// !!! no class level comments
+/*
+ * Represents a List of Grade objects and a list of String to keep track of the different classes each grade is from.
+ */
 
 public class GradesCalculator {
     private List<Grade> grades;

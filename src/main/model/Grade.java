@@ -1,6 +1,8 @@
 package model;
 
-// !!! class level comment
+/*
+ * Represents a Grade with the numeric mark value, an assignment name, and a class name.
+ */
 
 public class Grade {
     private double mark;
