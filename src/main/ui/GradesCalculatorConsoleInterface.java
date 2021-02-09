@@ -5,7 +5,6 @@ import model.GradesCalculator;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 // !!! no comments yet
 
@@ -53,27 +52,30 @@ public class GradesCalculatorConsoleInterface {
     }
 
     private void processOperation(String operation) {
+        String output = "";
+
         switch (operation) {
             case ("a"):
-                addGrade();
+                output = addGrade();
                 break;
             case ("r"):
-                removeGrade();
+                output = removeGrade();
                 break;
             case ("va"):
-                viewAll();
+                output = viewAll();
                 break;
             case ("vc"):
-                viewClass();
+                output = viewClass();
                 break;
             case ("c"):
-                oneAverage();
+                output = oneAverage();
                 break;
             case ("co"):
-                overallAverage();
+                output = overallAverage();
                 break;
         }
-
+        System.out.println(output);
+        pause();
     }
 
     private void pause() {
@@ -84,7 +86,7 @@ public class GradesCalculatorConsoleInterface {
         }
     }
 
-    private void addGrade() {
+    private String addGrade() {
         Grade grade;
         double mark;
         String assignment;
@@ -100,9 +102,11 @@ public class GradesCalculatorConsoleInterface {
         grade = new Grade(mark, assignment, className);
 
         gradesCalculator.addGrade(grade);
+
+        return grade.toString();
     }
 
-    private void removeGrade() {
+    private String removeGrade() {
         String assignment;
         String className;
 
@@ -112,46 +116,45 @@ public class GradesCalculatorConsoleInterface {
         className = input.nextLine();
 
         gradesCalculator.removeGrade(assignment, className);
+
+        return "Removed " + assignment;
     }
 
-    private void viewAll() {
+    private String viewAll() {
         List<Grade> grades = gradesCalculator.getGrades();
+        String output = "";
 
         for (Grade grade : grades) {
-            System.out.println(grade);
+            output += grade.toString() + "\n";
         }
-
-        pause();
+        return output;
     }
 
-    private void viewClass() {
+    private String viewClass() {
         String command;
+        String output = "";
         System.out.println("Please insert a class.");
         command = input.nextLine();
-        List<Grade> output = gradesCalculator.returnClassGrades(command);
+        List<Grade> grades = gradesCalculator.returnClassGrades(command);
 
-        for (Grade grade : output) {
-            System.out.println(grade);
+        for (Grade grade : grades) {
+            output += grade.toString() + "\n";
         }
 
-        pause();
+        return output;
     }
 
-    private void oneAverage() {
+    private String oneAverage() {
         String command;
         System.out.println("Please insert a class.");
         command = input.nextLine();
         double output = gradesCalculator.calculateClassAverage(command);
 
-        System.out.println(output);
-
-        pause();
+        return Double.toString(output);
     }
 
-    private void overallAverage() {
-        System.out.println(gradesCalculator.calculateOverallAverage());
-
-        pause();
+    private String overallAverage() {
+        return Double.toString(gradesCalculator.calculateOverallAverage());
     }
 
 }
