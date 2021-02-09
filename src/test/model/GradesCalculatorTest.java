@@ -30,6 +30,40 @@ class GradesCalculatorTest {
     }
 
     @Test
+    void tryRemoveGradeNotMatchAssignmentName() {
+        Grade grade = new Grade(24.6, "Homework", "MATH 102");
+        calc.addGrade(grade);
+        List<Grade> output = calc.getGrades();
+
+        assertTrue(output.contains(grade));
+        assertEquals(1, output.size());
+
+        calc.removeGrade("Homework 1", "MATH 102");
+
+        output = calc.getGrades();
+
+        assertTrue(output.contains(grade));
+        assertEquals(1, output.size());
+    }
+
+    @Test
+    void tryRemoveGradeNotMatchClassName() {
+        Grade grade = new Grade(24.6, "Homework", "MATH 435");
+        calc.addGrade(grade);
+        List<Grade> output = calc.getGrades();
+
+        assertTrue(output.contains(grade));
+        assertEquals(1, output.size());
+
+        calc.removeGrade("Homework", "MATH 205");
+
+        output = calc.getGrades();
+
+        assertTrue(output.contains(grade));
+        assertEquals(1, output.size());
+    }
+
+    @Test
     void addOneGradeRemoveOneGrade() {
         Grade grade = new Grade(87, "Test 5", "CPSC 123");
         calc.addGrade(grade);
@@ -39,6 +73,8 @@ class GradesCalculatorTest {
         assertEquals(1, output.size());
 
         calc.removeGrade("Test 5", "CPSC 123");
+
+        output = calc.getGrades();
 
         assertFalse(output.contains(grade));
         assertEquals(0, output.size());
