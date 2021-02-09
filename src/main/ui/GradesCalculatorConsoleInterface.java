@@ -13,10 +13,16 @@ public class GradesCalculatorConsoleInterface {
     private GradesCalculator gradesCalculator;
     private Scanner input;
 
+    /*
+     * EFFECTS: Calls runConsoleInterface() to run the program
+     */
     public GradesCalculatorConsoleInterface() {
         runConsoleInterface();
     }
 
+    /*
+     * EFFECTS: Loops and waits for user input until user quits program.
+     */
     private void runConsoleInterface() {
         boolean continueInterface = true;
         String operation;
@@ -35,11 +41,17 @@ public class GradesCalculatorConsoleInterface {
         System.out.println("Thank you, see you next time!");
     }
 
+    /*
+     * EFFECTS: Instantiates the private fields in the class
+     */
     private void initialize() {
         gradesCalculator = new GradesCalculator();
         input = new Scanner(System.in);
     }
 
+    /*
+     * EFFECTS: Prints out console menu for the user
+     */
     private void printMenu() {
         System.out.println("Please choose one of the following: \n"
                 + "a  - Add a new grade \n"
@@ -51,6 +63,9 @@ public class GradesCalculatorConsoleInterface {
                 + "q  - Quit program");
     }
 
+    /*
+     * EFFECTS: Calls a method according to the user's input and prints out the output
+     */
     private void processOperation(String operation) {
         String output = "";
 
@@ -78,6 +93,9 @@ public class GradesCalculatorConsoleInterface {
         pause();
     }
 
+    /*
+     * EFFECTS: Lets the console and program wait for 1 second before continuing
+     */
     private void pause() {
         try {
             Thread.sleep(1000);
@@ -86,6 +104,11 @@ public class GradesCalculatorConsoleInterface {
         }
     }
 
+    /*
+     * EFFECTS: Asks user for a grade, assignment name, and class name.
+     *          Creates a Grade object given this information and adds it to gradesCalculator.
+     *          Returns the Grade object's string value to output back to the user.
+     */
     private String addGrade() {
         Grade grade;
         double mark;
@@ -106,6 +129,11 @@ public class GradesCalculatorConsoleInterface {
         return grade.toString();
     }
 
+    /*
+     * EFFECTS: Asks user for an assignment name and class name.
+     *          Calls gradesCalculator.removeGrade() with the
+     *          information given and returns a String for the user's feedback.
+     */
     private String removeGrade() {
         String assignment;
         String className;
@@ -120,6 +148,9 @@ public class GradesCalculatorConsoleInterface {
         return "Removed " + assignment;
     }
 
+    /*
+     * EFFECTS: Returns the String value of all the Grade objects in grades.
+     */
     private String viewAll() {
         List<Grade> grades = gradesCalculator.getGrades();
         String output = "";
@@ -130,6 +161,9 @@ public class GradesCalculatorConsoleInterface {
         return output;
     }
 
+    /*
+     * EFFECTS: Returns the String value of all the Grade objects in grades whose className is the user inputted class.
+     */
     private String viewClass() {
         String command;
         String output = "";
@@ -144,6 +178,9 @@ public class GradesCalculatorConsoleInterface {
         return output;
     }
 
+    /*
+     * EFFECTS: Returns the average of the class the user inputted.
+     */
     private String oneAverage() {
         String command;
         System.out.println("Please insert a class.");
@@ -153,6 +190,9 @@ public class GradesCalculatorConsoleInterface {
         return Double.toString(output);
     }
 
+    /*
+     * EFFECTS: Returns the overall average (average of every class' average).
+     */
     private String overallAverage() {
         return Double.toString(gradesCalculator.calculateOverallAverage());
     }

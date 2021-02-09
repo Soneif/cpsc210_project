@@ -88,7 +88,6 @@ public class GradesCalculator {
     /*
      * EFFECTS: Returns a list of Grade objects whose className matches the inputted class name.
      */
-
     public List<Grade> returnClassGrades(String className) {
         List<Grade> gradesInClass = new ArrayList<>();
         for (Grade grade : grades) {

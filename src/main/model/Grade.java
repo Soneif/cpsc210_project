@@ -9,7 +9,8 @@ public class Grade {
 
     /*
      * REQUIRES: mark is a non-negative value
-     * EFFECTS: each input is assigned to their respective field (who has the same name)
+     * EFFECTS: Constructs a Grade object where each input is assigned to
+     *          their respective field (who has the same name)
      */
 
     public Grade(double mark, String assignmentName, String className) {
@@ -30,18 +31,34 @@ public class Grade {
         return this.className;
     }
 
+    /*
+     * REQUIRES: newMark is a non-negative value
+     * MODIFIES: this
+     * EFFECTS: Changes the mark's value to a new value
+     */
     public void changeMark(double newMark) {
         this.mark = newMark;
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: Changes the assignmentName to a new name
+     */
     public void changeAssignmentName(String newAssignmentName) {
         this.assignmentName = newAssignmentName;
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: Changes the className to a new class name
+     */
     public void changeClassName(String newClassName) {
         this.className = newClassName;
     }
 
+    /*
+     * EFFECTS: Changes the object's String return value
+     */
     @Override
     public String toString() {
         return "Class: " + this.className + "\n Assignment: " + this.assignmentName + "\n Mark: " + this.mark;
