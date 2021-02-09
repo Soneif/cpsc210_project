@@ -32,4 +32,8 @@ class GradeTest {
         assertEquals("CPSC 110", grade.getClassName());
     }
 
+    @Test
+    void fromGradeToString() {
+        assertEquals("Class: CPSC 210" + "\n Assignment: Lab 2" + "\n Mark: 50.7", grade.toString());
+    }
 }
