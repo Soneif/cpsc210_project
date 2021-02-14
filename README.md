@@ -7,6 +7,6 @@
 - Add my grade(s)
 - Remove grade(s)
 - View all my grades
-- Choose a class and check my grades for said class
+- Choose a class and check all my grades for said class
 - Calculate the average in any of my classes
 - Calculate my overall average

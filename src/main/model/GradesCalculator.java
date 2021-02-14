@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
- * Represents a List of Grade objects and a list of String to keep track of the different classes each grade is from.
+ * Represents a List of Grade objects and a list of String to keep track of
+ * the different classes each grade is from.
  */
 
 public class GradesCalculator {
@@ -88,6 +89,7 @@ public class GradesCalculator {
     }
 
     /*
+     * REQUIRES: className is a String that is contained in classes
      * EFFECTS: Returns a list of Grade objects whose className matches the inputted class name.
      */
     public List<Grade> returnClassGrades(String className) {

@@ -44,7 +44,7 @@ public class Grade {
 
     /*
      * MODIFIES: this
-     * EFFECTS: Changes the assignmentName to a new name
+     * EFFECTS: Changes the assignmentName to a new assignment name
      */
     public void changeAssignmentName(String newAssignmentName) {
         this.assignmentName = newAssignmentName;
