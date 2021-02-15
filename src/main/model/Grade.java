@@ -21,14 +21,17 @@ public class Grade {
         this.className = className;
     }
 
+    // EFFECTS: Returns the mark for this grade.
     public double getMark() {
         return this.mark;
     }
 
+    // EFFECTS: Returns the assignment name corresponding to this grade.
     public String getAssignmentName() {
         return this.assignmentName;
     }
 
+    // EFFECTS: Returns the class name corresponding to this grade.
     public String getClassName() {
         return this.className;
     }
