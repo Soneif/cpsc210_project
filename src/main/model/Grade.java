@@ -38,7 +38,6 @@ public class Grade {
 
     /*
      * REQUIRES: newMark is a non-negative value
-     * MODIFIES: this
      * EFFECTS: Changes the mark's value to a new value
      */
     public void changeMark(double newMark) {
