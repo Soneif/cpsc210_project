@@ -2,7 +2,11 @@ package ui;
 
 import model.Grade;
 import model.GradesCalculator;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,6 +21,9 @@ public class GradesCalculatorConsoleInterface {
 
     private GradesCalculator gradesCalculator;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+    private static final String PATH = ".data/savedData";
 
     /*
      * EFFECTS: Calls runConsoleInterface() to run the program
@@ -51,6 +58,8 @@ public class GradesCalculatorConsoleInterface {
      */
     private void initialize() {
         input = new Scanner(System.in);
+        jsonReader = new JsonReader(PATH);
+        jsonWriter = new JsonWriter(PATH);
         System.out.println("What's your name?");
         gradesCalculator = new GradesCalculator(input.nextLine());
     }
@@ -61,11 +70,13 @@ public class GradesCalculatorConsoleInterface {
     private void printMenu() {
         System.out.println("Please choose one of the following: \n"
                 + "a  - Add a new grade \n"
-                + "r  - remove grade \n"
+                + "r  - Remove grade \n"
                 + "va - (view all) View all grades \n"
                 + "vc - (view class) View grades for a specific class \n"
                 + "c  - View the average for a specific class \n"
                 + "co - (calculate overall) Calculate overall average \n"
+                + "s  - Save grades to file \n"
+                + "l  - Load grades from file \n"
                 + "q  - Quit program");
     }
 
@@ -75,26 +86,24 @@ public class GradesCalculatorConsoleInterface {
     private void processOperation(String operation) {
         String output = "";
 
-        switch (operation) {
-            case ("a"):
-                output = addGrade();
-                break;
-            case ("r"):
-                output = removeGrade();
-                break;
-            case ("va"):
-                output = viewAll();
-                break;
-            case ("vc"):
-                output = viewClass();
-                break;
-            case ("c"):
-                output = oneAverage();
-                break;
-            case ("co"):
-                output = overallAverage();
-                break;
+        if (operation.equals("a")) {
+            output = addGrade();
+        } else if (operation.equals("r")) {
+            output = removeGrade();
+        } else if (operation.equals("va")) {
+            output = viewAll();
+        } else if (operation.equals("vc")) {
+            output = viewClass();
+        } else if (operation.equals("c")) {
+            output = oneAverage();
+        } else if (operation.equals("co")) {
+            output = overallAverage();
+        } else if (operation.equals("s")) {
+            output = saveGrades();
+        } else if (operation.equals("l")) {
+            output = loadGrades();
         }
+
         System.out.println(output);
         pause();
     }
@@ -201,6 +210,29 @@ public class GradesCalculatorConsoleInterface {
      */
     private String overallAverage() {
         return Double.toString(gradesCalculator.calculateOverallAverage());
+    }
+
+    // EFFECTS: saves the grades(calculator) to file
+    private String saveGrades() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(gradesCalculator);
+            jsonWriter.close();
+            return "Saved " + gradesCalculator.getUser() + " to " + PATH;
+        } catch (FileNotFoundException e) {
+            return "Unable to write to file: " + PATH;
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads grades(calculator) from file
+    private String loadGrades() {
+        try {
+            gradesCalculator = jsonReader.read();
+            return "Loaded " + gradesCalculator.getUser() + " from " + PATH;
+        } catch (IOException e) {
+            return "Unable to read from file: " + PATH;
+        }
     }
 
 }

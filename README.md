@@ -10,5 +10,5 @@
 - Choose a class and check all my grades for said class
 - Calculate the average in any of my classes
 - Calculate my overall average
-- Save my grades to a file.
-- Load my grades from a file.
+- Save my grades to file.
+- Load my grades from file.
