@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 /* TODO: Citation - code from JsonSerializationDemo and modified for GradesCalculator
          (https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo) */
 
-// Represents a reader that reads workroom from JSON data stored in file
+// Represents a reader that reads GradesCalculator from JSON data stored in file
 public class JsonReader {
     private String source;
 

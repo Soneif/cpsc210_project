@@ -128,6 +128,7 @@ public class GradesCalculator implements Writable {
         return gradesInClass;
     }
 
+
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -136,6 +137,7 @@ public class GradesCalculator implements Writable {
         return json;
     }
 
+    // EFFECTS: returns grades in this gradesCalculator as a JSON array
     private JSONArray gradesToJson() {
         JSONArray jsonArray = new JSONArray();
 
