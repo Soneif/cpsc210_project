@@ -18,7 +18,8 @@ class GradesCalculatorTest {
 
     @BeforeEach
     void initialize() {
-        calc = new GradesCalculator("test");
+        calc = new GradesCalculator();
+        calc.setUser("test");
     }
 
     @Test
