@@ -1,0 +1,20 @@
+{
+  "grades": [
+    {
+      "className": "EOSC 112",
+      "assignmentName": "Concept Sketch",
+      "mark": 100
+    },
+    {
+      "className": "DSCI 100",
+      "assignmentName": "Project Proposal",
+      "mark": 94.6
+    },
+    {
+      "className": "DSCI 100",
+      "assignmentName": "Project Pledge",
+      "mark": 80.5
+    }
+  ],
+  "user": "Emma"
+}

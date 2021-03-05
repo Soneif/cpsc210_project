@@ -1,5 +1,9 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,20 +12,29 @@ import java.util.List;
  * the different classes each grade is from.
  */
 
-public class GradesCalculator {
+/* TODO: Citation - code from JsonSerializationDemo (toJson & gradesToJson(), modified for GradesCalculator)
+         (https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo) */
+
+public class GradesCalculator implements Writable {
     private List<Grade> grades;
     private List<String> classes;
+    private String user;
 
     /*
      * EFFECTS: instantiates grades and classes as Arraylists
      */
-    public GradesCalculator() {
-        grades = new ArrayList<>();
-        classes = new ArrayList<>();
+    public GradesCalculator(String user) {
+        this.grades = new ArrayList<>();
+        this.classes = new ArrayList<>();
+        this.user = user;
     }
 
     public List<Grade> getGrades() {
         return grades;
+    }
+
+    public String getUser() {
+        return this.user;
     }
 
     /*
@@ -101,6 +114,24 @@ public class GradesCalculator {
         }
 
         return gradesInClass;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("user", this.user);
+        json.put("grades", gradesToJson());
+        return json;
+    }
+
+    private JSONArray gradesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Grade grade : grades) {
+            jsonArray.put(grade.toJson());
+        }
+
+        return jsonArray;
     }
 
 }

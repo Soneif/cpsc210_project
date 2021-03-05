@@ -1,0 +1,20 @@
+{
+    "grades": [
+        {
+            "className": "CPSC 210",
+            "assignmentName": "Project Phase 2",
+            "mark": 75.2
+        },
+        {
+            "className": "CPSC 210",
+            "assignmentName": "Project Phase 1",
+            "mark": 27.35
+        },
+        {
+            "className": "MATH 101",
+            "assignmentName": "Midterm 1",
+            "mark": 80.6
+        }
+    ],
+    "user": "Eric"
+}

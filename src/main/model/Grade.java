@@ -4,7 +4,13 @@ package model;
  * Represents a Grade with the numeric mark value, an assignment name, and a class name.
  */
 
-public class Grade {
+/* TODO: Citation - code from JsonSerializationDemo and modified for Grade (toJson())
+         (https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo) */
+
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class Grade implements Writable {
     private double mark;
     private String assignmentName;
     private String className;
@@ -15,6 +21,8 @@ public class Grade {
      *          their respective field (who has the same name)
      */
 
+    // REQUIRES: mark >= 0
+    // EFFECTS: instantiates the grade's fields
     public Grade(double mark, String assignmentName, String className) {
         this.mark = mark;
         this.assignmentName = assignmentName;
@@ -68,4 +76,12 @@ public class Grade {
         return "Class: " + this.className + "\n Assignment: " + this.assignmentName + "\n Mark: " + this.mark;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("className", className);
+        json.put("assignmentName", assignmentName);
+        json.put("mark", mark);
+        return json;
+    }
 }

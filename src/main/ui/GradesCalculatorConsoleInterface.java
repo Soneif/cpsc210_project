@@ -10,6 +10,9 @@ import java.util.Scanner;
  * Console interface/application for GradesCalculator
  */
 
+/* TODO: Citation - code from TellerApp modified for GradesCalculatorConsoleInterface
+         (https://github.students.cs.ubc.ca/CPSC210/TellerApp) */
+
 public class GradesCalculatorConsoleInterface {
 
     private GradesCalculator gradesCalculator;
@@ -47,8 +50,9 @@ public class GradesCalculatorConsoleInterface {
      * EFFECTS: Instantiates the private fields in the class
      */
     private void initialize() {
-        gradesCalculator = new GradesCalculator();
         input = new Scanner(System.in);
+        System.out.println("What's your name?");
+        gradesCalculator = new GradesCalculator(input.nextLine());
     }
 
     /*

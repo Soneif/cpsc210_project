@@ -10,5 +10,5 @@
 - Choose a class and check all my grades for said class
 - Calculate the average in any of my classes
 - Calculate my overall average
-- When quitting the application, I can choose to save my grades to a file.
-- When starting the application, I can choose to load my grades from a file.
+- Save my grades to a file.
+- Load my grades from a file.
