@@ -23,7 +23,7 @@ public class GradesCalculatorConsoleInterface {
     private Scanner input;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-    private static final String PATH = ".data/savedData";
+    private static final String PATH = "./data/savedData.json";
 
     /*
      * EFFECTS: Calls runConsoleInterface() to run the program
@@ -60,8 +60,7 @@ public class GradesCalculatorConsoleInterface {
         input = new Scanner(System.in);
         jsonReader = new JsonReader(PATH);
         jsonWriter = new JsonWriter(PATH);
-        System.out.println("What's your name?");
-        gradesCalculator = new GradesCalculator(input.nextLine());
+        gradesCalculator = new GradesCalculator();
     }
 
     /*
@@ -214,6 +213,11 @@ public class GradesCalculatorConsoleInterface {
 
     // EFFECTS: saves the grades(calculator) to file
     private String saveGrades() {
+        if (gradesCalculator.getUser().equals("")) {
+            System.out.println("What's your name?");
+            gradesCalculator.setUser(input.nextLine());
+        }
+
         try {
             jsonWriter.open();
             jsonWriter.write(gradesCalculator);

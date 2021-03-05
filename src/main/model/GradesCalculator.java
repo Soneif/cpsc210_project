@@ -18,15 +18,23 @@ import java.util.List;
 public class GradesCalculator implements Writable {
     private List<Grade> grades;
     private List<String> classes;
-    private String user;
+    private String user = "";
 
     /*
-     * EFFECTS: instantiates grades and classes as Arraylists
+     * EFFECTS: instantiates grades and classes as Arraylists and sets a user name
      */
     public GradesCalculator(String user) {
         this.grades = new ArrayList<>();
         this.classes = new ArrayList<>();
         this.user = user;
+    }
+
+    /*
+     * EFFECTS: instantiates grades and classes as Arraylists with no user name
+     */
+    public GradesCalculator() {
+        this.grades = new ArrayList<>();
+        this.classes = new ArrayList<>();
     }
 
     public List<Grade> getGrades() {
@@ -35,6 +43,10 @@ public class GradesCalculator implements Writable {
 
     public String getUser() {
         return this.user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
     /*

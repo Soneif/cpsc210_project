@@ -1,0 +1,15 @@
+{
+    "grades": [
+        {
+            "className": "CPSC 210",
+            "assignmentName": "Homework",
+            "mark": 75
+        },
+        {
+            "className": "MATH 101",
+            "assignmentName": "Assignment 2",
+            "mark": 90
+        }
+    ],
+    "user": "Emma"
+}
