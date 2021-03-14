@@ -14,8 +14,9 @@ import javax.swing.*;
 //  Similarly, a sound and a gif can be played when opening the system.
 
 public class UserInterface extends JFrame {
-    private InputWindow input;
-    private OutputWindow output;
+    private InputPanel input;
+    private OutputPanel output;
+    private JPanel window;
 
     // Constructs main window
     // EFFECTS: sets up the window
@@ -24,10 +25,14 @@ public class UserInterface extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // TODO: Testing purposes; remove once implemented and debugged
-        input = new InputWindow();
-        add(input);
-//        output = new OutputWindow();
-//        add(output);
+        input = new InputPanel();
+        output = new OutputPanel();
+
+        window = new JPanel();
+        window.add(input);
+        window.add(output);
+
+        this.add(window);
 
         pack();
         setVisible(true);

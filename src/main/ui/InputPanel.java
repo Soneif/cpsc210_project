@@ -24,7 +24,7 @@ import java.awt.event.ActionListener;
 //   When the text fields are not in use, make them non-editable by the user.
 //   (This also means, they have to press a button first and then enter the corresponding inputs if required)
 
-public class InputWindow extends JPanel implements ActionListener {
+public class InputPanel extends JPanel implements ActionListener {
     private static final Dimension FIELD_SIZE = new Dimension(200, 24);
 
     private JLabel gradeLabel;
@@ -44,7 +44,7 @@ public class InputWindow extends JPanel implements ActionListener {
     private JButton enterButton;
 
     // EFFECTS: Initializes the sub panels in the input panel
-    public InputWindow() {
+    public InputPanel() {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         initializeComponents();
