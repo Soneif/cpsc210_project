@@ -96,18 +96,31 @@ public class InputWindow extends JPanel implements ActionListener {
     private void initializeButtons() {
         addButton = new JButton("Add grade");
         addButton.setActionCommand("add");
+        addButton.addActionListener(this);
+
         removeButton = new JButton("Remove grade");
         removeButton.setActionCommand("remove");
+        removeButton.addActionListener(this);
+
         viewClassButton = new JButton("View all grades from a class");
         viewClassButton.setActionCommand("class grades");
+        viewClassButton.addActionListener(this);
+
         viewClassAverageButton = new JButton("View a class average");
         viewClassAverageButton.setActionCommand("class average");
+        viewClassAverageButton.addActionListener(this);
+
         viewOverallAverageButton = new JButton("View the overall average");
         viewOverallAverageButton.setActionCommand("overall average");
+        viewOverallAverageButton.addActionListener(this);
+
         saveLoadWindowButton = new JButton("Open the save/load/quit menu");
         saveLoadWindowButton.setActionCommand("open menu");
+        saveLoadWindowButton.addActionListener(this);
+
         enterButton = new JButton("Enter");
         enterButton.setActionCommand("enter");
+        enterButton.addActionListener(this);
     }
 
     // EFFECTS: When a button is pressed, do what the button says
@@ -115,23 +128,19 @@ public class InputWindow extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
         if (command.equals("add")) {
-            //
+            System.out.println("add");
         } else if (command.equals("remove")) {
-            //
+            System.out.println("remove");
         } else if (command.equals("class grades")) {
-            //
+            System.out.println("class grades");
         } else if (command.equals("class average")) {
-            //
+            System.out.println("class average");
         } else if (command.equals("overall average")) {
-            //
+            System.out.println("overall average");
         } else if (command.equals("enter")) {
-            //
+            System.out.println("enter");
         } else {
-            JFrame exitWindow = new JFrame();
-            exitWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            exitWindow.add(new SaveLoadWindow());
-            exitWindow.pack();
-            exitWindow.setVisible(true);
+            new SaveLoadWindow();
         }
     }
 }

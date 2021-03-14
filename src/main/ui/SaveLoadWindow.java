@@ -16,16 +16,38 @@ import static java.lang.System.exit;
 //  The panel should give a message detailing whether it had successfully saved/loaded and then close itself.
 //  If quit is clicked, close.
 
-public class SaveLoadWindow extends JPanel implements ActionListener {
+public class SaveLoadWindow extends JFrame implements ActionListener {
     private JLabel options;
     private JButton save;
     private JButton load;
     private JButton quit;
+    private JPanel overlay;
 
-    // EFFECTS: Initializes the buttons and label in the panel
+    // EFFECTS: Initializes the sub panels and places them in the JFrame
     public SaveLoadWindow() {
-        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        overlay = new JPanel();
+        overlay.setLayout(new BoxLayout(overlay, BoxLayout.PAGE_AXIS));
 
+        initializeComponents();
+
+        JPanel labelPanel = new JPanel();
+        labelPanel.add(options);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(save);
+        buttonPanel.add(load);
+        buttonPanel.add(quit);
+
+        overlay.add(labelPanel);
+        overlay.add(buttonPanel);
+        this.add(overlay);
+
+        this.pack();
+        this.setVisible(true);
+    }
+
+    // EFFECTS: Initializes the components for the sub panels
+    public void initializeComponents() {
         options = new JLabel("Please select one of the three options.");
         options.setHorizontalAlignment(JLabel.CENTER);
 
@@ -40,17 +62,6 @@ public class SaveLoadWindow extends JPanel implements ActionListener {
         save.addActionListener(this);
         load.addActionListener(this);
         quit.addActionListener(this);
-
-        JPanel labelPanel = new JPanel();
-        labelPanel.add(options);
-
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(save);
-        buttonPanel.add(load);
-        buttonPanel.add(quit);
-
-        this.add(labelPanel);
-        this.add(buttonPanel);
     }
 
     // EFFECTS: When a button is pressed, do what the button says
@@ -59,9 +70,9 @@ public class SaveLoadWindow extends JPanel implements ActionListener {
         String command = e.getActionCommand();
 
         if (command.equals("save")) {
-            // TODO: save
+            System.out.println("save");
         } else if (command.equals("load")) {
-            // TODO: load
+            System.out.println("load");
         } else {
             exit(0);
         }

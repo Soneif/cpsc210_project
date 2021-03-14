@@ -16,7 +16,6 @@ import javax.swing.*;
 public class UserInterface extends JFrame {
     private InputWindow input;
     private OutputWindow output;
-    private SaveLoadWindow saveLoad;
 
     // Constructs main window
     // EFFECTS: sets up the window
@@ -25,12 +24,10 @@ public class UserInterface extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // TODO: Testing purposes; remove once implemented and debugged
-//        input = new InputWindow();
-//        add(input);
+        input = new InputWindow();
+        add(input);
 //        output = new OutputWindow();
 //        add(output);
-//        saveLoad = new SaveLoadWindow();
-//        add(saveLoad);
 
         pack();
         setVisible(true);
