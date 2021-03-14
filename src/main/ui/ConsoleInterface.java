@@ -17,7 +17,7 @@ import java.util.Scanner;
 /* TODO: Citation - code from TellerApp modified for GradesCalculatorConsoleInterface
          (https://github.students.cs.ubc.ca/CPSC210/TellerApp) */
 
-public class GradesCalculatorConsoleInterface {
+public class ConsoleInterface {
 
     private GradesCalculator gradesCalculator;
     private Scanner input;
@@ -28,7 +28,7 @@ public class GradesCalculatorConsoleInterface {
     /*
      * EFFECTS: Calls runConsoleInterface() to run the program
      */
-    public GradesCalculatorConsoleInterface() {
+    public ConsoleInterface() {
         runConsoleInterface();
     }
 

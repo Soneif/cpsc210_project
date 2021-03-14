@@ -1,0 +1,8 @@
+{
+    "grades": [{
+        "className": "MATH 101",
+        "assignmentName": "Homework",
+        "mark": 50
+    }],
+    "user": "Eric"
+}

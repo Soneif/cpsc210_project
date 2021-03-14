@@ -2,9 +2,9 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/SampleMidtermRepos" vcs="" />
-    <mapping directory="$PROJECT_DIR$/SimpleDrawingPlayer-Starter" vcs="" />
-    <mapping directory="$PROJECT_DIR$/TellerApp" vcs="" />
-    <mapping directory="$PROJECT_DIR$/TellerAppNotRobust" vcs="" />
+    <mapping directory="$PROJECT_DIR$/SampleMidtermRepos" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/SimpleDrawingPlayer-Starter" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/TellerApp" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/TellerAppNotRobust" vcs="Git" />
   </component>
 </project>
