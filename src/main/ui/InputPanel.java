@@ -1,5 +1,7 @@
 package ui;
 
+import model.GradesCalculator;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -27,6 +29,8 @@ import java.awt.event.ActionListener;
 public class InputPanel extends JPanel implements ActionListener {
     private static final Dimension FIELD_SIZE = new Dimension(200, 24);
 
+    private OutputPanel outputPanel;
+
     private JLabel gradeLabel;
     private JLabel classLabel;
     private JLabel assignmentLabel;
@@ -44,7 +48,9 @@ public class InputPanel extends JPanel implements ActionListener {
     private JButton enterButton;
 
     // EFFECTS: Initializes the sub panels in the input panel
-    public InputPanel() {
+    public InputPanel(OutputPanel outputPanel) {
+        this.outputPanel = outputPanel;
+
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         initializeComponents();
@@ -140,7 +146,8 @@ public class InputPanel extends JPanel implements ActionListener {
         } else if (command.equals("enter")) {
             System.out.println("enter");
         } else {
-            new SaveLoadWindow();
+            // TODO: test
+            new SaveLoadFrame(new GradesCalculator(), outputPanel);
         }
     }
 }

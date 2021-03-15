@@ -1,0 +1,161 @@
+package ui;
+
+import model.GradesCalculator;
+import persistence.JsonReader;
+import persistence.JsonWriter;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import static java.lang.System.exit;
+
+/*
+ * Represents the panel in which an option to save or load information is provided.
+ */
+
+// TODO:
+//  A panel with three buttons, save, load, and quit.
+//  The panel should give a message detailing whether it had successfully saved/loaded and then close itself.
+//  If quit is clicked, close.
+
+public class SaveLoadFrame extends JFrame implements ActionListener {
+    private OutputPanel outputPanel;
+
+    private static final String PATH = "./data/savedData.json";
+    private GradesCalculator gradesCalculator;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+
+    private JLabel options;
+    private JButton save;
+    private JButton load;
+    private JButton quit;
+    private JPanel overlay;
+
+    private JLabel nameLabel;
+    private JTextField name;
+    private JButton enter;
+    private JFrame frame;
+
+    // EFFECTS: Initializes the sub panels and places them in the JFrame
+    public SaveLoadFrame(GradesCalculator gradesCalculator, OutputPanel outputPanel) {
+        this.outputPanel = outputPanel;
+        this.gradesCalculator = gradesCalculator;
+        jsonReader = new JsonReader(PATH);
+        jsonWriter = new JsonWriter(PATH);
+
+        overlay = new JPanel();
+        overlay.setLayout(new BoxLayout(overlay, BoxLayout.PAGE_AXIS));
+
+        initializeComponents();
+
+        JPanel labelPanel = new JPanel();
+        labelPanel.add(options);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(save);
+        buttonPanel.add(load);
+        buttonPanel.add(quit);
+
+        overlay.add(labelPanel);
+        overlay.add(buttonPanel);
+        this.add(overlay);
+
+        this.pack();
+        this.setVisible(true);
+    }
+
+    // EFFECTS: Initializes the components for the sub panels
+    public void initializeComponents() {
+        options = new JLabel("Please select one of the three options.");
+        options.setHorizontalAlignment(JLabel.CENTER);
+
+        save = new JButton("Save to file");
+        load = new JButton("Load from file");
+        quit = new JButton("Quit program");
+
+        save.setActionCommand("save");
+        load.setActionCommand("load");
+        quit.setActionCommand("quit");
+
+        save.addActionListener(this);
+        load.addActionListener(this);
+        quit.addActionListener(this);
+    }
+
+    // EFFECTS: When a button is pressed, do what the button says
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String command = e.getActionCommand();
+        String output = "";
+
+        if (command.equals("save")) {
+            output = saveGrades();
+        } else if (command.equals("load")) {
+            output = loadGrades();
+        } else if (command.equals("enter")) {
+            gradesCalculator.setUser(name.getText());
+            output = saveGrades();
+            frame.dispose();
+        } else {
+            exit(0);
+        }
+
+        outputPanel.setActionLog(output);
+        this.dispose();
+    }
+
+    // EFFECTS: checks if there is already a user name, if not, prompt the user to input it
+    private void checkUser() {
+        if (gradesCalculator.getUser().equals("")) {
+            frame = new JFrame();
+            JPanel panel = new JPanel();
+
+            nameLabel = new JLabel("Please enter a name: ");
+
+            name = new JTextField();
+            name.setPreferredSize(new Dimension(200, 24));
+
+            enter = new JButton("Enter");
+            enter.setActionCommand("enter");
+            enter.addActionListener(this);
+
+            panel.add(nameLabel);
+            panel.add(name);
+            panel.add(enter);
+
+            frame.add(panel);
+            frame.pack();
+            frame.setVisible(true);
+        }
+    }
+
+    // EFFECTS: saves the grades(calculator) to file
+    private String saveGrades() {
+        checkUser();
+        try {
+            jsonWriter.open();
+            jsonWriter.write(gradesCalculator);
+            jsonWriter.close();
+            return "Saved " + gradesCalculator.getUser() + " to " + PATH;
+        } catch (FileNotFoundException e) {
+            return "Unable to write to file: " + PATH;
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads grades(calculator) from file
+    private String loadGrades() {
+        try {
+            gradesCalculator = jsonReader.read();
+            return "Loaded " + gradesCalculator.getUser() + " from " + PATH;
+        } catch (IOException e) {
+            return "Unable to read from file: " + PATH;
+        }
+    }
+
+}

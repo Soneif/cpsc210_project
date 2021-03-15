@@ -25,12 +25,13 @@ public class UserInterface extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // TODO: Testing purposes; remove once implemented and debugged
-        input = new InputPanel();
         output = new OutputPanel();
+        input = new InputPanel(output);
 
         window = new JPanel();
-        window.add(input);
+        window.setLayout(new BoxLayout(window, BoxLayout.PAGE_AXIS));
         window.add(output);
+        window.add(input);
 
         this.add(window);
 

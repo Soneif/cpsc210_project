@@ -1,20 +1,4 @@
 {
-    "grades": [
-        {
-            "className": "CPSC 210",
-            "assignmentName": "Homework",
-            "mark": 75
-        },
-        {
-            "className": "MATH 101",
-            "assignmentName": "Assignment 2",
-            "mark": 90
-        },
-        {
-            "className": "CPSC 210",
-            "assignmentName": "Project",
-            "mark": 59.2
-        }
-    ],
-    "user": "Emma"
+    "grades": [],
+    "user": "Ethan"
 }
