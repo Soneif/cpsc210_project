@@ -4,15 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CurrentStatusPanel extends JPanel {
-    private JTextField currentStatusField;
+    private static final Dimension PANE_SIZE = new Dimension(400, 100);
+    private JTextArea currentStatusField;
 
     // EFFECTS: Instantiates the text field in the panel
     public CurrentStatusPanel() {
-        currentStatusField = new JTextField("Your Grades:");
+        currentStatusField = new JTextArea("Your Grades:");
         currentStatusField.setEditable(false);
-        currentStatusField.setPreferredSize(new Dimension(450, 100));
 
-        this.add(currentStatusField);
+        JScrollPane scrollPane = new JScrollPane(currentStatusField);
+        scrollPane.setPreferredSize(PANE_SIZE);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        this.add(scrollPane);
     }
 
     // MODIFIES: this

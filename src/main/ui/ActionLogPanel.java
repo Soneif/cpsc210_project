@@ -4,15 +4,19 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ActionLogPanel extends JPanel {
-    private JTextField actionLogField;
+    private static final Dimension PANE_SIZE = new Dimension(450, 100);
+    private JTextArea actionLogField;
 
     // EFFECTS: Instantiates the text field in the panel
     public ActionLogPanel() {
-        actionLogField = new JTextField("Action Log:");
+        actionLogField = new JTextArea("Action Log:");
         actionLogField.setEditable(false);
-        actionLogField.setPreferredSize(new Dimension(450, 100));
 
-        this.add(actionLogField);
+        JScrollPane scrollPane = new JScrollPane(actionLogField);
+        scrollPane.setPreferredSize(PANE_SIZE);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+        this.add(scrollPane);
     }
 
     // MODIFIES: this

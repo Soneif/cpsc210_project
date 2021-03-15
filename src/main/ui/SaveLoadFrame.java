@@ -11,8 +11,6 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import static java.lang.System.exit;
-
 /*
  * Represents the panel in which an option to save or load information is provided.
  */
@@ -33,7 +31,6 @@ public class SaveLoadFrame extends JFrame implements ActionListener {
     private JLabel options;
     private JButton save;
     private JButton load;
-    private JButton quit;
     private JPanel overlay;
 
     private JLabel nameLabel;
@@ -59,7 +56,6 @@ public class SaveLoadFrame extends JFrame implements ActionListener {
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(save);
         buttonPanel.add(load);
-        buttonPanel.add(quit);
 
         overlay.add(labelPanel);
         overlay.add(buttonPanel);
@@ -71,20 +67,17 @@ public class SaveLoadFrame extends JFrame implements ActionListener {
 
     // EFFECTS: Initializes the components for the sub panels
     public void initializeComponents() {
-        options = new JLabel("Please select one of the three options.");
+        options = new JLabel("Please select either option.");
         options.setHorizontalAlignment(JLabel.CENTER);
 
         save = new JButton("Save to file");
         load = new JButton("Load from file");
-        quit = new JButton("Quit program");
 
         save.setActionCommand("save");
         load.setActionCommand("load");
-        quit.setActionCommand("quit");
 
         save.addActionListener(this);
         load.addActionListener(this);
-        quit.addActionListener(this);
     }
 
     // EFFECTS: When a button is pressed, do what the button says
@@ -93,24 +86,30 @@ public class SaveLoadFrame extends JFrame implements ActionListener {
         String command = e.getActionCommand();
         String output = "";
 
-        if (command.equals("save")) {
-            output = saveGrades();
-        } else if (command.equals("load")) {
-            output = loadGrades();
-        } else if (command.equals("enter")) {
-            gradesCalculator.setUser(name.getText());
-            output = saveGrades();
-            frame.dispose();
-        } else {
-            exit(0);
+        switch (command) {
+            case "save":
+                if (checkUser()) {
+                    output = saveGrades();
+                }
+                break;
+            case "enter":
+                gradesCalculator.setUser(name.getText());
+                output = saveGrades();
+                frame.dispose();
+                break;
+            default:
+                output = loadGrades();
+                break;
         }
 
-        outputPanel.setActionLog(output);
+        String original = outputPanel.getActionLog();
+        outputPanel.setActionLog(original + output);
+        outputPanel.setCurrentStatus("Your Grades: \n" + gradesCalculator.toString());
         this.dispose();
     }
 
     // EFFECTS: checks if there is already a user name, if not, prompt the user to input it
-    private void checkUser() {
+    private boolean checkUser() {
         if (gradesCalculator.getUser().equals("")) {
             frame = new JFrame();
             JPanel panel = new JPanel();
@@ -131,12 +130,15 @@ public class SaveLoadFrame extends JFrame implements ActionListener {
             frame.add(panel);
             frame.pack();
             frame.setVisible(true);
+
+            return false;
         }
+        return true;
     }
 
     // EFFECTS: saves the grades(calculator) to file
     private String saveGrades() {
-        checkUser();
+
         try {
             jsonWriter.open();
             jsonWriter.write(gradesCalculator);

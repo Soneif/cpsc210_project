@@ -1,11 +1,13 @@
 package ui;
 
+import model.Grade;
 import model.GradesCalculator;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 /*
  * Represents the panel in which the user inputs information (through buttons and text fields).
@@ -29,6 +31,7 @@ import java.awt.event.ActionListener;
 public class InputPanel extends JPanel implements ActionListener {
     private static final Dimension FIELD_SIZE = new Dimension(200, 24);
 
+    private GradesCalculator gradesCalculator;
     private OutputPanel outputPanel;
 
     private JLabel gradeLabel;
@@ -45,11 +48,11 @@ public class InputPanel extends JPanel implements ActionListener {
     private JButton viewClassAverageButton;
     private JButton viewOverallAverageButton;
     private JButton saveLoadWindowButton;
-    private JButton enterButton;
 
     // EFFECTS: Initializes the sub panels in the input panel
     public InputPanel(OutputPanel outputPanel) {
         this.outputPanel = outputPanel;
+        gradesCalculator = new GradesCalculator();
 
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
@@ -58,16 +61,14 @@ public class InputPanel extends JPanel implements ActionListener {
         JPanel fieldPanel = new JPanel();
         fieldPanel.add(gradeLabel);
         fieldPanel.add(gradeField);
-        fieldPanel.add(classLabel);
-        fieldPanel.add(classField);
         fieldPanel.add(assignmentLabel);
         fieldPanel.add(assignmentField);
-        fieldPanel.add(enterButton);
+        fieldPanel.add(classLabel);
+        fieldPanel.add(classField);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(addButton);
         buttonPanel.add(removeButton);
-        buttonPanel.add(viewClassButton);
         buttonPanel.add(viewClassAverageButton);
         buttonPanel.add(viewOverallAverageButton);
         buttonPanel.add(saveLoadWindowButton);
@@ -87,9 +88,6 @@ public class InputPanel extends JPanel implements ActionListener {
         classField = new JTextField();
         assignmentField = new JTextField();
 
-        gradeField.setEditable(false);
-        classField.setEditable(false);
-        assignmentField.setEditable(false);
         gradeField.setPreferredSize(FIELD_SIZE);
         classField.setPreferredSize(FIELD_SIZE);
         assignmentField.setPreferredSize(FIELD_SIZE);
@@ -120,34 +118,100 @@ public class InputPanel extends JPanel implements ActionListener {
         viewOverallAverageButton.setActionCommand("overall average");
         viewOverallAverageButton.addActionListener(this);
 
-        saveLoadWindowButton = new JButton("Open the save/load/quit menu");
+        saveLoadWindowButton = new JButton("Open the save/load menu");
         saveLoadWindowButton.setActionCommand("open menu");
         saveLoadWindowButton.addActionListener(this);
 
-        enterButton = new JButton("Enter");
-        enterButton.setActionCommand("enter");
-        enterButton.addActionListener(this);
     }
 
     // EFFECTS: When a button is pressed, do what the button says
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
+        String output = "";
         if (command.equals("add")) {
-            System.out.println("add");
+            output = addGrade();
         } else if (command.equals("remove")) {
-            System.out.println("remove");
+            output = removeGrade();
         } else if (command.equals("class grades")) {
-            System.out.println("class grades");
+            output = viewClass();
         } else if (command.equals("class average")) {
-            System.out.println("class average");
+            output = oneAverage();
         } else if (command.equals("overall average")) {
-            System.out.println("overall average");
-        } else if (command.equals("enter")) {
-            System.out.println("enter");
+            output = overallAverage();
         } else {
-            // TODO: test
-            new SaveLoadFrame(new GradesCalculator(), outputPanel);
+            new SaveLoadFrame(gradesCalculator, outputPanel);
         }
+
+        String original = outputPanel.getActionLog();
+        outputPanel.setActionLog(original + "\n" + output);
+        outputPanel.setCurrentStatus("Your Grades: " + "\n" + gradesCalculator.toString());
     }
+
+    /*
+     * EFFECTS: Asks user for a grade, assignment name, and class name.
+     *          Creates a Grade object given this information and adds it to gradesCalculator.
+     *          Returns the Grade object's string value to output back to the user.
+     */
+    private String addGrade() {
+        Grade grade;
+        double mark;
+        String assignment;
+        String className;
+
+        mark = Double.parseDouble(gradeField.getText());
+        assignment = assignmentField.getText();
+        className = classField.getText();
+
+        grade = new Grade(mark, assignment, className);
+
+        gradesCalculator.addGrade(grade);
+
+        return "Added " + grade.getAssignmentName();
+    }
+
+    /*
+     * EFFECTS: Asks user for an assignment name and class name.
+     *          Calls gradesCalculator.removeGrade() with the
+     *          information given and returns a String for the user's feedback.
+     */
+    private String removeGrade() {
+        String assignment;
+        String className;
+
+        assignment = assignmentField.getText();
+        className = classField.getText();
+
+        gradesCalculator.removeGrade(assignment, className);
+
+        return "Removed " + assignment;
+    }
+
+    /*
+     * EFFECTS: Returns the String value of all the Grade objects in grades whose className is the user inputted class.
+     */
+    private String viewClass() {
+        String className = classField.getText();
+        List<Grade> grades = gradesCalculator.returnClassGrades(className);
+
+        return grades.toString();
+    }
+
+    /*
+     * EFFECTS: Returns the average of the class the user inputted.
+     */
+    private String oneAverage() {
+        String className = classField.getText();
+        double output = gradesCalculator.calculateClassAverage(className);
+
+        return Double.toString(output);
+    }
+
+    /*
+     * EFFECTS: Returns the overall average (average of every class' average).
+     */
+    private String overallAverage() {
+        return Double.toString(gradesCalculator.calculateOverallAverage());
+    }
+
 }
