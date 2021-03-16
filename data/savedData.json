@@ -14,6 +14,16 @@
             "className": "CPSC 210",
             "assignmentName": "Exam 1",
             "mark": 80
+        },
+        {
+            "className": "MATH 101",
+            "assignmentName": "Homework 4",
+            "mark": 100
+        },
+        {
+            "className": "MATH 101",
+            "assignmentName": "Homework 5",
+            "mark": 24
         }
     ],
     "user": "Sophia"

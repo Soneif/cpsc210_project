@@ -1,5 +1,6 @@
 package ui;
 
+import model.Grade;
 import model.GradesCalculator;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -10,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * Represents the panel in which an option to save or load information is provided.
@@ -148,11 +151,21 @@ public class SaveLoadFrame extends JFrame implements ActionListener {
     // EFFECTS: loads grades(calculator) from file
     private String loadGrades() {
         try {
-            gradesCalculator = jsonReader.read();
+            GradesCalculator gc = jsonReader.read();
+            changeGrades(gc);
             return "Loaded " + gradesCalculator.getUser() + " from " + PATH;
         } catch (IOException e) {
             return "Unable to read from file: " + PATH;
         }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: changes the values in gradesCalculator to the saved gradesCalculator values
+    private void changeGrades(GradesCalculator gc) {
+        List<Grade> gradesList = gc.getGrades();
+        String user = gc.getUser();
+        gradesCalculator.setGrades(gradesList);
+        gradesCalculator.setUser(user);
     }
 
 }

@@ -13,8 +13,6 @@ import java.util.List;
  * Represents the panel in which the user inputs information (through buttons and text fields).
  */
 
-// TODO: add button for graph making, and make new JFrame when the graph is called
-
 public class InputPanel extends JPanel implements ActionListener {
     private static final Dimension FIELD_SIZE = new Dimension(200, 24);
 
@@ -220,6 +218,9 @@ public class InputPanel extends JPanel implements ActionListener {
 
         JFrame frame = new JFrame();
         frame.add(new GraphPanel(grades));
+
+        frame.pack();
+        frame.setVisible(true);
 
         return "Generated a graph for " + className + "'s marks.";
     }

@@ -41,6 +41,10 @@ public class GradesCalculator implements Writable {
         return grades;
     }
 
+    public void setGrades(List<Grade> gradeList) {
+        this.grades = gradeList;
+    }
+
     public String getUser() {
         return this.user;
     }
