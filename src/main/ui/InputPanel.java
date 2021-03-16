@@ -13,6 +13,8 @@ import java.util.List;
  * Represents the panel in which the user inputs information (through buttons and text fields).
  */
 
+// TODO: add button for graph making, and make new JFrame when the graph is called
+
 public class InputPanel extends JPanel implements ActionListener {
     private static final Dimension FIELD_SIZE = new Dimension(200, 24);
 
@@ -33,6 +35,7 @@ public class InputPanel extends JPanel implements ActionListener {
     private JButton viewClassAverageButton;
     private JButton viewOverallAverageButton;
     private JButton saveLoadWindowButton;
+    private JButton generateGraphButton;
 
     // EFFECTS: Initializes the sub panels in the input panel
     public InputPanel(OutputPanel outputPanel) {
@@ -58,6 +61,7 @@ public class InputPanel extends JPanel implements ActionListener {
         buttonPanel.add(viewClassAverageButton);
         buttonPanel.add(viewOverallAverageButton);
         buttonPanel.add(saveLoadWindowButton);
+        buttonPanel.add(generateGraphButton);
 
         this.add(fieldPanel);
         this.add(buttonPanel);
@@ -108,6 +112,9 @@ public class InputPanel extends JPanel implements ActionListener {
         saveLoadWindowButton.setActionCommand("open menu");
         saveLoadWindowButton.addActionListener(this);
 
+        generateGraphButton = new JButton("Generate graph from class marks");
+        generateGraphButton.setActionCommand("generate graph");
+        generateGraphButton.addActionListener(this);
     }
 
     // EFFECTS: When a button is pressed, do what the button says
@@ -125,6 +132,8 @@ public class InputPanel extends JPanel implements ActionListener {
             output = oneAverage();
         } else if (command.equals("overall average")) {
             output = overallAverage();
+        } else if (command.equals("generate graph")) {
+            output = generateGraph();
         } else {
             new SaveLoadFrame(gradesCalculator, outputPanel);
         }
@@ -202,6 +211,17 @@ public class InputPanel extends JPanel implements ActionListener {
      */
     private String overallAverage() {
         return "Overall average: " + Double.toString(gradesCalculator.calculateOverallAverage());
+    }
+
+    // EFFECTS: generates a graph and makes a new JFrame to place the graph in, returns output message
+    private String generateGraph() {
+        String className = classField.getText();
+        List<Grade> grades = gradesCalculator.returnClassGrades(className);
+
+        JFrame frame = new JFrame();
+        frame.add(new GraphPanel(grades));
+
+        return "Generated a graph for " + className + "'s marks.";
     }
 
 }
