@@ -165,4 +165,16 @@ class GradesCalculatorTest {
         List<Grade> grades = calc.returnClassGrades("DSCI 500");
         assertEquals(match, grades);
     }
+
+    @Test
+    void setGradesTest() {
+        List<Grade> test = new ArrayList<>();
+        Grade grade = new Grade(24.4, "Homework 1", "MATH 100");
+        test.add(grade);
+        grade = new Grade(2.5, "Quiz 1", "MATH 100");
+        test.add(grade);
+        calc.setGrades(test);
+        assertEquals(test, calc.getGrades());
+    }
+
 }

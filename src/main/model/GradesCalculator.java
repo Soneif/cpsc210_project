@@ -152,15 +152,4 @@ public class GradesCalculator implements Writable {
         return jsonArray;
     }
 
-    @Override
-    public String toString() {
-        String output = "";
-
-        for (Grade grade : grades) {
-            output += grade.toString() + "\n";
-        }
-
-        return output;
-    }
-
 }
