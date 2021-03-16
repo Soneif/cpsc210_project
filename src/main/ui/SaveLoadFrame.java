@@ -15,11 +15,6 @@ import java.io.IOException;
  * Represents the panel in which an option to save or load information is provided.
  */
 
-// TODO:
-//  A panel with three buttons, save, load, and quit.
-//  The panel should give a message detailing whether it had successfully saved/loaded and then close itself.
-//  If quit is clicked, close.
-
 public class SaveLoadFrame extends JFrame implements ActionListener {
     private OutputPanel outputPanel;
 
