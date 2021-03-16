@@ -69,6 +69,7 @@ public class InputPanel extends JPanel implements ActionListener {
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(addButton);
         buttonPanel.add(removeButton);
+        buttonPanel.add(viewClassButton);
         buttonPanel.add(viewClassAverageButton);
         buttonPanel.add(viewOverallAverageButton);
         buttonPanel.add(saveLoadWindowButton);
@@ -142,7 +143,11 @@ public class InputPanel extends JPanel implements ActionListener {
         } else {
             new SaveLoadFrame(gradesCalculator, outputPanel);
         }
+        printOperation(output);
+    }
 
+    // EFFECTS: Prints out status message for operations
+    private void printOperation(String output) {
         String original = outputPanel.getActionLog();
         outputPanel.setActionLog(original + "\n" + output);
         outputPanel.setCurrentStatus("Your Grades: " + "\n" + gradesCalculator.toString());
@@ -194,7 +199,7 @@ public class InputPanel extends JPanel implements ActionListener {
         String className = classField.getText();
         List<Grade> grades = gradesCalculator.returnClassGrades(className);
 
-        return grades.toString();
+        return className + " grades: \n" + grades.toString();
     }
 
     /*
@@ -204,14 +209,14 @@ public class InputPanel extends JPanel implements ActionListener {
         String className = classField.getText();
         double output = gradesCalculator.calculateClassAverage(className);
 
-        return Double.toString(output);
+        return className + " average: " + Double.toString(output);
     }
 
     /*
      * EFFECTS: Returns the overall average (average of every class' average).
      */
     private String overallAverage() {
-        return Double.toString(gradesCalculator.calculateOverallAverage());
+        return "Overall average: " + Double.toString(gradesCalculator.calculateOverallAverage());
     }
 
 }

@@ -1,4 +1,20 @@
 {
-    "grades": [],
-    "user": "Sophie"
+    "grades": [
+        {
+            "className": "MATH 101",
+            "assignmentName": "Homework 2",
+            "mark": 50
+        },
+        {
+            "className": "MATH 101",
+            "assignmentName": "Homework 1",
+            "mark": 75
+        },
+        {
+            "className": "CPSC 210",
+            "assignmentName": "Exam 1",
+            "mark": 80
+        }
+    ],
+    "user": "Sophia"
 }
