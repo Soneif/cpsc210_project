@@ -1,7 +1,6 @@
 package ui;
 
 import javax.swing.*;
-import java.awt.*;
 
 /*
  * Represents the panel in which the information about grades

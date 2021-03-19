@@ -201,14 +201,14 @@ public class InputPanel extends JPanel implements ActionListener {
         String className = classField.getText();
         double output = gradesCalculator.calculateClassAverage(className);
 
-        return className + " average: " + Double.toString(output);
+        return className + " average: " + output;
     }
 
     /*
      * EFFECTS: Returns the overall average (average of every class' average).
      */
     private String overallAverage() {
-        return "Overall average: " + Double.toString(gradesCalculator.calculateOverallAverage());
+        return "Overall average: " + gradesCalculator.calculateOverallAverage();
     }
 
     // EFFECTS: generates a graph and makes a new JFrame to place the graph in, returns output message

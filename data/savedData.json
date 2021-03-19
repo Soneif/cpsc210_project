@@ -24,6 +24,11 @@
             "className": "MATH 101",
             "assignmentName": "Homework 5",
             "mark": 24
+        },
+        {
+            "className": "CPSC 210",
+            "assignmentName": "Homework 2",
+            "mark": 50
         }
     ],
     "user": "Sophia"

@@ -53,6 +53,14 @@ public class GradesCalculator implements Writable {
         this.user = user;
     }
 
+    public List<String> getClasses() {
+        return this.classes;
+    }
+
+    public void setClasses(List<String> classList) {
+        this.classes = classList;
+    }
+
     /*
      *  REQUIRES: mark >= 0 and no Grade in grades that has the same assignmentName and className
      *  MODIFIES: this
@@ -150,6 +158,17 @@ public class GradesCalculator implements Writable {
         }
 
         return jsonArray;
+    }
+
+    @Override
+    public String toString() {
+        String output = "";
+
+        for (Grade grade : grades) {
+            output += grade.toString() + "\n";
+        }
+
+        return output;
     }
 
 }

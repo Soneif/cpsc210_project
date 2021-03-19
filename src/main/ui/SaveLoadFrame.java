@@ -166,6 +166,8 @@ public class SaveLoadFrame extends JFrame implements ActionListener {
         String user = gc.getUser();
         gradesCalculator.setGrades(gradesList);
         gradesCalculator.setUser(user);
+        List<String> classList = gc.getClasses();
+        gradesCalculator.setClasses(classList);
     }
 
 }
