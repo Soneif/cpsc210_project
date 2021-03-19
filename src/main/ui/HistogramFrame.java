@@ -1,10 +1,12 @@
 package ui;
 
+import javafx.scene.transform.Affine;
 import model.Grade;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -68,6 +70,7 @@ public class HistogramFrame extends JFrame {
 
         extractInfo();
         buildAxes();
+        addLabels();
         fillGraph();
 
         g2d.dispose();
@@ -131,6 +134,19 @@ public class HistogramFrame extends JFrame {
             g2d.drawLine(width, CANVAS_HEIGHT - PADDING, width, tickLength);
             g2d.drawString(Integer.toString(i), width - 3, tickLength + 13);
         }
+    }
+
+    // EFFECTS: Add labels to the histogram
+    public void addLabels() {
+        // adding the x-axis label
+        g2d.drawString("Grades (%)", CANVAS_WIDTH / 2 - 10, CANVAS_HEIGHT - PADDING + 40);
+        // we need to rotate before we write the y-axis label
+        Font font = g2d.getFont();
+        AffineTransform affineTransform = new AffineTransform();
+        affineTransform.rotate(Math.toRadians(-90), 0, 0);
+        Font rotatedFont = font.deriveFont(affineTransform);
+        g2d.setFont(rotatedFont);
+        g2d.drawString("Number of Grades in Range", PADDING - 30, CANVAS_HEIGHT / 2 + 60);
     }
 
     // EFFECTS: Fills the histogram with given data

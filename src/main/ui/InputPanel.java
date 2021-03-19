@@ -2,6 +2,7 @@ package ui;
 
 import model.Grade;
 import model.GradesCalculator;
+import sun.java2d.marlin.stats.Histogram;
 
 import javax.swing.*;
 import java.awt.*;
@@ -216,11 +217,7 @@ public class InputPanel extends JPanel implements ActionListener {
         String className = classField.getText();
         List<Grade> grades = gradesCalculator.returnClassGrades(className);
 
-        JFrame frame = new JFrame();
-        frame.add(new GraphPanel(grades));
-
-        frame.pack();
-        frame.setVisible(true);
+        new HistogramFrame(grades);
 
         return "Generated a graph for " + className + "'s marks.";
     }

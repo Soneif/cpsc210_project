@@ -29,6 +29,16 @@
             "className": "CPSC 210",
             "assignmentName": "Homework 2",
             "mark": 50
+        },
+        {
+            "className": "CPSC 210",
+            "assignmentName": "Project 1",
+            "mark": 100
+        },
+        {
+            "className": "CPSC 210",
+            "assignmentName": "Project 2",
+            "mark": 90
         }
     ],
     "user": "Sophia"
