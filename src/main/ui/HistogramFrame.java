@@ -31,16 +31,6 @@ public class HistogramFrame extends JFrame {
     private double[] grades;
     private String className;
 
-    public static void main(String[] args) {
-        List<Grade> test = new ArrayList<>();
-        test.add(new Grade(50, "Homework 1", "CPSC 210"));
-        test.add(new Grade(80, "Homework 2", "CPSC 210"));
-        test.add(new Grade(90, "Homework 3", "CPSC 210"));
-        test.add(new Grade(100, "Homework 4", "CPSC 210"));
-        test.add(new Grade(55, "Homework 1", "CPSC 210"));
-        new HistogramFrame(test);
-    }
-
     // EFFECTS: Instantiates the JFrame and the JFrame's components
     public HistogramFrame(List<Grade> gradesList) {
         this.gradesList = gradesList;
@@ -49,6 +39,26 @@ public class HistogramFrame extends JFrame {
         BufferedImage bufferedImage = new BufferedImage(CANVAS_WIDTH, CANVAS_HEIGHT, BufferedImage.TYPE_INT_RGB);
         g2d = bufferedImage.createGraphics();
 
+        drawGraph();
+
+        File file = new File(PATH);
+        try {
+            ImageIO.write(bufferedImage, "png", file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        JPanel panel = new JPanel();
+
+        JLabel picLabel = new JLabel(new ImageIcon(bufferedImage));
+        panel.add(picLabel);
+        this.add(panel);
+        this.pack();
+        this.setVisible(true);
+    }
+
+    // EFFECTS: Draw the histogram
+    public void drawGraph() {
         g2d.setColor(Color.white);
         g2d.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
@@ -61,14 +71,6 @@ public class HistogramFrame extends JFrame {
         fillGraph();
 
         g2d.dispose();
-
-        File file = new File(PATH);
-        try {
-            ImageIO.write(bufferedImage, "png", file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
     // MODIFIES: this
