@@ -175,4 +175,23 @@ class GradesCalculatorTest {
         assertEquals(test, calc.getGrades());
     }
 
+    @Test
+    void printGradesTest() {
+        Grade grade = new Grade(20.8, "Worksheet 6", "DSCI 500");
+        calc.addGrade(grade);
+        grade = new Grade(88.5, "Worksheet 1", "DSCI 200");
+        calc.addGrade(grade);
+        grade = new Grade(96, "Test 7", "DSCI 500");
+        calc.addGrade(grade);
+        assertEquals("Class: DSCI 500\n" +
+                " Assignment: Worksheet 6\n" +
+                " Mark: 20.8\n" +
+                "Class: DSCI 200\n" +
+                " Assignment: Worksheet 1\n" +
+                " Mark: 88.5\n" +
+                "Class: DSCI 500\n" +
+                " Assignment: Test 7\n" +
+                " Mark: 96.0\n", calc.toString());
+    }
+
 }
