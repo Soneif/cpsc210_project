@@ -2,7 +2,6 @@ package ui;
 
 import model.Grade;
 import model.GradesCalculator;
-import sun.java2d.marlin.stats.Histogram;
 
 import javax.swing.*;
 import java.awt.*;

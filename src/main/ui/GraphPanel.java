@@ -69,9 +69,9 @@ public class GraphPanel extends JPanel {
 
         for (int i = 0; i < grades.length; i++) {
             if (i == 0) {
-                g2d.fillOval(x * i - CIRCLE_RADIUS,y * grades[i] - CIRCLE_RADIUS, CIRCLE_RADIUS, CIRCLE_RADIUS);
+                g2d.fillOval(x * i - CIRCLE_RADIUS, y * grades[i] - CIRCLE_RADIUS, CIRCLE_RADIUS, CIRCLE_RADIUS);
             } else {
-                g2d.fillOval(x * i - CIRCLE_RADIUS,y * grades[i] - CIRCLE_RADIUS, CIRCLE_RADIUS, CIRCLE_RADIUS);
+                g2d.fillOval(x * i - CIRCLE_RADIUS, y * grades[i] - CIRCLE_RADIUS, CIRCLE_RADIUS, CIRCLE_RADIUS);
                 g2d.drawLine(preX, preY, x * i - CIRCLE_RADIUS / 2, y * grades[i] - CIRCLE_RADIUS / 2);
             }
             preX = x * i - CIRCLE_RADIUS / 2;
