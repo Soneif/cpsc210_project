@@ -194,4 +194,14 @@ class GradesCalculatorTest {
                 " Mark: 96.0\n", calc.toString());
     }
 
+    @Test
+    void setClassesTest() {
+        List<String> test = new ArrayList<>();
+        test.add("Test 1");
+        test.add("Test 2");
+        test.add("Test 3");
+        calc.setClasses(test);
+        assertEquals(test, calc.getClasses());
+    }
+
 }
