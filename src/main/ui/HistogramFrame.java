@@ -64,7 +64,7 @@ public class HistogramFrame extends JFrame {
 
         g2d.setColor(Color.black);
 
-        g2d.drawString(className + "'s Grade Distribution", CANVAS_WIDTH / 2 - 30, TITLE_MARGIN);
+        g2d.drawString(className + "'s Grade Distribution", CANVAS_WIDTH / 2 - 50, TITLE_MARGIN);
 
         extractInfo();
         buildAxes();
