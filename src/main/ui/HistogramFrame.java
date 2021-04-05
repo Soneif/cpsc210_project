@@ -33,6 +33,7 @@ public class HistogramFrame extends JFrame {
     private double[] grades;
     private String className;
 
+    // REQUIRES: gradesList is not an empty list
     // EFFECTS: Instantiates the JFrame and the JFrame's components
     public HistogramFrame(List<Grade> gradesList) {
         this.gradesList = gradesList;

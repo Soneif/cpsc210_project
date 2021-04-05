@@ -16,3 +16,11 @@
 
 Phase 4: Task 2
 Tested and designed GradesCalculator in the model package to be robust.
+
+Phase 4: Task 3
+- Change the design of UserInterface with InputPanel and OutputPanel
+    - Increase cohesion
+    - Reduce coupling
+    - Improves readability and makes the program easier to update
+    - *Both UserInterface and InputPanel have associations to OutputPanel, 
+    while UserInterface has an association with InputPanel! This should have been avoided.*
