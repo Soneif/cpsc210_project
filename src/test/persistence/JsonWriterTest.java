@@ -1,5 +1,7 @@
 package persistence;
 
+import exceptions.NegativeMarkException;
+import exceptions.PreExistingGradeException;
 import model.Grade;
 import model.GradesCalculator;
 import org.junit.jupiter.api.Test;
@@ -46,29 +48,51 @@ class JsonWriterTest extends JsonTest {
 
     @Test
     void testWriterGeneralGradesCalculator() {
+        GradesCalculator gc = new GradesCalculator("Eric");
         try {
-            GradesCalculator gc = new GradesCalculator("Eric");
             gc.addGrade(new Grade(75.2, "Project Phase 2", "CPSC 210"));
+        } catch (NegativeMarkException e) {
+            fail("Exception should not have been thrown");
+        } catch (PreExistingGradeException e) {
+            fail("Exception should not have been thrown");
+        }
+        try {
             gc.addGrade(new Grade(27.35, "Project Phase 1", "CPSC 210"));
+        } catch (NegativeMarkException e) {
+            fail("Exception should not have been thrown");
+        } catch (PreExistingGradeException e) {
+            fail("Exception should not have been thrown");
+        }
+        try {
             gc.addGrade(new Grade(80.6, "Midterm 1", "MATH 101"));
+        } catch (NegativeMarkException e) {
+            fail("Exception should not have been thrown");
+        } catch (PreExistingGradeException e) {
+            fail("Exception should not have been thrown");
+        }
 
-            JsonWriter writer = new JsonWriter("./data/testWriterGeneralGradesCalculator.json");
+        JsonWriter writer = new JsonWriter("./data/testWriterGeneralGradesCalculator.json");
+        try {
             writer.open();
-            writer.write(gc);
-            writer.close();
-
-            JsonReader reader = new JsonReader("./data/testWriterGeneralGradesCalculator.json");
-            gc = reader.read();
-            assertEquals("Eric", gc.getUser());
-            List<Grade> grades = gc.getGrades();
-            assertEquals(3, grades.size());
-
-            checkGrade(75.2, "Project Phase 2", "CPSC 210", grades.get(0));
-            checkGrade(27.35, "Project Phase 1", "CPSC 210", grades.get(1));
-            checkGrade(80.6, "Midterm 1", "MATH 101", grades.get(2));
-
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
+        writer.write(gc);
+        writer.close();
+
+        JsonReader reader = new JsonReader("./data/testWriterGeneralGradesCalculator.json");
+        try {
+            gc = reader.read();
+        } catch (IOException e) {
+            fail("Exception should not have been thrown");
+        }
+        assertEquals("Eric", gc.getUser());
+        List<Grade> grades = gc.getGrades();
+        assertEquals(3, grades.size());
+
+        checkGrade(75.2, "Project Phase 2", "CPSC 210", grades.get(0));
+        checkGrade(27.35, "Project Phase 1", "CPSC 210", grades.get(1));
+        checkGrade(80.6, "Midterm 1", "MATH 101", grades.get(2));
     }
+
 }

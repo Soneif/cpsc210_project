@@ -2,6 +2,8 @@ package ui;
 
 import exceptions.EmptyClassListException;
 import exceptions.InvalidClassNameException;
+import exceptions.NegativeMarkException;
+import exceptions.PreExistingGradeException;
 import model.Grade;
 import model.GradesCalculator;
 
@@ -164,7 +166,13 @@ public class InputPanel extends JPanel implements ActionListener {
 
         grade = new Grade(mark, assignment, className);
 
-        gradesCalculator.addGrade(grade);
+        try {
+            gradesCalculator.addGrade(grade);
+        } catch (NegativeMarkException e) {
+            return "Please enter a non-negative mark!";
+        } catch (PreExistingGradeException e) {
+            return "Please enter a grade that is not already in the system!";
+        }
 
         return "Added " + grade.getAssignmentName();
     }
