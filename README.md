@@ -15,4 +15,4 @@
 
 
 Phase 4: Task 2
-Tested and designed a class in the model package that is robust.
+Tested and designed GradesCalculator in the model package to be robust.
