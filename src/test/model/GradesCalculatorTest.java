@@ -321,4 +321,79 @@ class GradesCalculatorTest {
         assertEquals(test, calc.getClasses());
     }
 
+    @Test
+    void addNegativeMark() {
+        try {
+            calc.addGrade(new Grade(-20, "Homework 1", "MATH 101"));
+            fail("Should have thrown exception.");
+        } catch (NegativeMarkException e) {
+            // This is expected
+        } catch (PreExistingGradeException e) {
+            fail("Thrown wrong exception.");
+        }
+    }
+
+    @Test
+    void addPreExistingMark() {
+        try {
+            calc.addGrade(new Grade(5, "Homework 2", "CPSC 210"));
+        } catch (NegativeMarkException e) {
+            fail("No exception expected.");
+        } catch (PreExistingGradeException e) {
+            fail("No exception expected.");
+        }
+
+        try {
+            calc.addGrade(new Grade(5, "Homework 2", "CPSC 210"));
+            fail("Should have thrown exception.");
+        } catch (NegativeMarkException e) {
+            fail("No exception expected.");
+        } catch (PreExistingGradeException e) {
+            // This is expected
+        }
+
+    }
+
+    @Test
+    void calculateClassAverageForClassNotInCalculator() {
+        try {
+            calc.addGrade(new Grade(100, "Homework 5", "DSCI 100"));
+        } catch (NegativeMarkException | PreExistingGradeException e) {
+            fail("No exception expected.");
+        }
+
+        try {
+            calc.calculateClassAverage("MATH 101");
+            fail("Should have thrown exception.");
+        } catch (InvalidClassNameException e) {
+            // This is expected
+        }
+    }
+
+    @Test
+    void calculateOverallAverageForEmptyCalculator() {
+        try {
+            calc.calculateOverallAverage();
+            fail("Should have thrown exception.");
+        } catch (EmptyClassListException e) {
+            // This is expected
+        }
+    }
+
+    @Test
+    void returnClassAverageForClassNotInCalculator() {
+        try {
+            calc.addGrade(new Grade(100, "Homework 5", "DSCI 100"));
+        } catch (NegativeMarkException | PreExistingGradeException e) {
+            fail("No exception expected.");
+        }
+
+        try {
+            calc.returnClassGrades("MATH 101");
+            fail("Should have thrown exception.");
+        } catch (InvalidClassNameException e) {
+            // This is expected
+        }
+    }
+
 }
