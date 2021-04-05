@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.InvalidClassNameException;
 import model.Grade;
 import model.GradesCalculator;
 import persistence.JsonReader;
@@ -183,7 +184,12 @@ public class ConsoleInterface {
         String output = "";
         System.out.println("Please insert a class.");
         command = input.nextLine();
-        List<Grade> grades = gradesCalculator.returnClassGrades(command);
+        List<Grade> grades;
+        try {
+            grades = gradesCalculator.returnClassGrades(command);
+        } catch (InvalidClassNameException e) {
+            return "Please enter a class that exists in the system.";
+        }
 
         for (Grade grade : grades) {
             output += grade.toString() + "\n";

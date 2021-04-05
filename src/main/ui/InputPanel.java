@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.InvalidClassNameException;
 import model.Grade;
 import model.GradesCalculator;
 
@@ -189,7 +190,12 @@ public class InputPanel extends JPanel implements ActionListener {
      */
     private String viewClass() {
         String className = classField.getText();
-        List<Grade> grades = gradesCalculator.returnClassGrades(className);
+        List<Grade> grades = null;
+        try {
+            grades = gradesCalculator.returnClassGrades(className);
+        } catch (InvalidClassNameException e) {
+            return "Please enter a class that exists in the system.";
+        }
 
         return className + " grades: \n" + grades.toString();
     }
@@ -214,7 +220,12 @@ public class InputPanel extends JPanel implements ActionListener {
     // EFFECTS: generates a graph and makes a new JFrame to place the graph in, returns output message
     private String generateGraph() {
         String className = classField.getText();
-        List<Grade> grades = gradesCalculator.returnClassGrades(className);
+        List<Grade> grades = null;
+        try {
+            grades = gradesCalculator.returnClassGrades(className);
+        } catch (InvalidClassNameException e) {
+            return "Please enter a class that exists in the system.";
+        }
 
         new HistogramFrame(grades);
 
