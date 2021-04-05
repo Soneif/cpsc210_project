@@ -71,10 +71,8 @@ public class JsonReader {
         Grade grade = new Grade(mark, assignmentName, className);
         try {
             gc.addGrade(grade);
-        } catch (NegativeMarkException e) {
-            System.err.println("Negative mark in the JSON file.");
-        } catch (PreExistingGradeException e) {
-            System.err.println("Pre-existing grade in the JSON file.");
+        } catch (NegativeMarkException | PreExistingGradeException e) {
+            e.printStackTrace();
         }
     }
 

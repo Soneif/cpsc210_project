@@ -54,4 +54,15 @@ class JsonReaderTest extends JsonTest {
             fail("Couldn't read from file");
         }
     }
+
+    @Test
+    void testReadNegativeValue() {
+        JsonReader reader = new JsonReader("./data/testNegativeGradesCalculator.json");
+        try {
+            GradesCalculator gc = reader.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

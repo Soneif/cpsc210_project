@@ -230,7 +230,7 @@ class GradesCalculatorTest {
         }
 
         try {
-            assertEquals((eoscAverage + cpscAverage + mathAverage) / 3, calc.calculateOverallAverage());
+            assertEquals(Double.toString((eoscAverage + cpscAverage + mathAverage) / 3), calc.calculateOverallAverage());
         } catch (EmptyClassListException e) {
             fail("Exception should not have been thrown");
         }

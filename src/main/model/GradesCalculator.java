@@ -149,7 +149,7 @@ public class GradesCalculator implements Writable {
      * EFFECTS: Returns a list of Grade objects whose className matches the inputted class name.
      */
     public List<Grade> returnClassGrades(String className) throws InvalidClassNameException {
-        if (classes.contains(className)) {
+        if (!classes.contains(className)) {
             throw new InvalidClassNameException();
         }
 
