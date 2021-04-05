@@ -10,6 +10,8 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.util.Objects;
+
 public class Grade implements Writable {
     private double mark;
     private String assignmentName;
@@ -83,5 +85,24 @@ public class Grade implements Writable {
         json.put("assignmentName", assignmentName);
         json.put("mark", mark);
         return json;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Grade grade = (Grade) o;
+        return Double.compare(grade.mark, mark) == 0
+                && Objects.equals(assignmentName, grade.assignmentName)
+                && Objects.equals(className, grade.className);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mark, assignmentName, className);
     }
 }

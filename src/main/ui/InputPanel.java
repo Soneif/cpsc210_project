@@ -232,7 +232,7 @@ public class InputPanel extends JPanel implements ActionListener {
         try {
             average = "Overall average: " + gradesCalculator.calculateOverallAverage();
         } catch (EmptyClassListException e) {
-            e.printStackTrace();
+            return "Please enter some grades first before trying to calculate an overall average!";
         }
         return average;
     }
