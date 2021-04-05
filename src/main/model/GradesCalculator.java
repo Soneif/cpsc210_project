@@ -1,5 +1,9 @@
 package model;
 
+import exceptions.EmptyClassListException;
+import exceptions.InvalidClassNameException;
+import exceptions.NegativeMarkException;
+import exceptions.PreExistingGradeException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
@@ -62,12 +66,18 @@ public class GradesCalculator implements Writable {
     }
 
     /*
-     *  REQUIRES: mark >= 0 and no Grade in grades that has the same assignmentName and className
      *  MODIFIES: this
      *  EFFECTS: Creates a Grade object using the given inputs and
      *          adds className to classes if it's not already in classes.
      */
-    public void addGrade(Grade grade) {
+    public void addGrade(Grade grade) throws NegativeMarkException, PreExistingGradeException {
+        if (grade.getMark() < 0) {
+            throw new NegativeMarkException();
+        }
+        if (grades.contains(grade)) {
+            throw new PreExistingGradeException();
+        }
+
         grades.add(grade);
 
         if (!classes.contains(grade.getClassName())) {
@@ -94,10 +104,13 @@ public class GradesCalculator implements Writable {
 
 
     /*
-     * REQUIRES: className is in classes
      * EFFECTS: Calculates the average of all grades whose class is className
      */
-    public double calculateClassAverage(String className) {
+    public double calculateClassAverage(String className) throws InvalidClassNameException {
+        if (!classes.contains(className)) {
+            throw new InvalidClassNameException();
+        }
+
         List<Grade> gradesInClass = returnClassGrades(className);
 
         double sum = 0;
@@ -110,10 +123,13 @@ public class GradesCalculator implements Writable {
     }
 
     /*
-     * REQUIRES: classes is not an empty list
      * EFFECTS: Calculates the overall average by taking the mean of every class' average.
      */
-    public double calculateOverallAverage() {
+    public double calculateOverallAverage() throws InvalidClassNameException, EmptyClassListException {
+        if (classes.size() == 0) {
+            throw new EmptyClassListException();
+        }
+
         double sum = 0;
         int n = 0;
 
@@ -126,10 +142,13 @@ public class GradesCalculator implements Writable {
     }
 
     /*
-     * REQUIRES: className is a String that is contained in classes
      * EFFECTS: Returns a list of Grade objects whose className matches the inputted class name.
      */
-    public List<Grade> returnClassGrades(String className) {
+    public List<Grade> returnClassGrades(String className) throws InvalidClassNameException {
+        if (classes.contains(className)) {
+            throw new InvalidClassNameException();
+        }
+
         List<Grade> gradesInClass = new ArrayList<>();
         for (Grade grade : grades) {
             if (grade.getClassName().equals(className)) {
