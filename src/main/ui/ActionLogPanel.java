@@ -3,6 +3,8 @@ package ui;
 import javax.swing.*;
 import java.awt.*;
 
+// An action log panel that logs all actions made.
+
 public class ActionLogPanel extends JPanel {
     private static final Dimension PANE_SIZE = new Dimension(450, 100);
     private JTextArea actionLogField;

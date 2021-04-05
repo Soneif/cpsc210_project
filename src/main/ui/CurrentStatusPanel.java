@@ -3,6 +3,8 @@ package ui;
 import javax.swing.*;
 import java.awt.*;
 
+// A panel that logs the current status of the grades.
+
 public class CurrentStatusPanel extends JPanel {
     private static final Dimension PANE_SIZE = new Dimension(400, 100);
     private JTextArea currentStatusField;

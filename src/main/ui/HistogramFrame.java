@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
+// A frame that generates a histogram based on a given class.
+
 public class HistogramFrame extends JFrame {
     public static final int CANVAS_WIDTH = 800;
     public static final int CANVAS_HEIGHT = 800;
