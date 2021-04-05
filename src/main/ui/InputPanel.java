@@ -206,7 +206,12 @@ public class InputPanel extends JPanel implements ActionListener {
      */
     private String oneAverage() {
         String className = classField.getText();
-        double output = gradesCalculator.calculateClassAverage(className);
+        double output = 0;
+        try {
+            output = gradesCalculator.calculateClassAverage(className);
+        } catch (InvalidClassNameException e) {
+            return "Please enter a class that is already in the system.";
+        }
 
         return className + " average: " + output;
     }

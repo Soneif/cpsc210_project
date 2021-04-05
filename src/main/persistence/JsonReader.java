@@ -1,5 +1,7 @@
 package persistence;
 
+import exceptions.NegativeMarkException;
+import exceptions.PreExistingGradeException;
 import model.Grade;
 import model.GradesCalculator;
 import org.json.JSONArray;
@@ -67,7 +69,13 @@ public class JsonReader {
         String assignmentName = jsonObject.getString("assignmentName");
         Double mark = jsonObject.getDouble("mark");
         Grade grade = new Grade(mark, assignmentName, className);
-        gc.addGrade(grade);
+        try {
+            gc.addGrade(grade);
+        } catch (NegativeMarkException e) {
+            System.err.println("Negative mark in the JSON file.");
+        } catch (PreExistingGradeException e) {
+            System.err.println("Pre-existing grade in the JSON file.");
+        }
     }
 
 

@@ -2,6 +2,8 @@ package ui;
 
 import exceptions.EmptyClassListException;
 import exceptions.InvalidClassNameException;
+import exceptions.NegativeMarkException;
+import exceptions.PreExistingGradeException;
 import model.Grade;
 import model.GradesCalculator;
 import persistence.JsonReader;
@@ -140,7 +142,13 @@ public class ConsoleInterface {
 
         grade = new Grade(mark, assignment, className);
 
-        gradesCalculator.addGrade(grade);
+        try {
+            gradesCalculator.addGrade(grade);
+        } catch (NegativeMarkException e) {
+            return "Please insert a non-negative mark!";
+        } catch (PreExistingGradeException e) {
+            return "Please insert a grade that does not already exist!";
+        }
 
         return grade.toString();
     }
@@ -206,7 +214,12 @@ public class ConsoleInterface {
         String command;
         System.out.println("Please insert a class.");
         command = input.nextLine();
-        double output = gradesCalculator.calculateClassAverage(command);
+        double output = 0;
+        try {
+            output = gradesCalculator.calculateClassAverage(command);
+        } catch (InvalidClassNameException e) {
+            return "Please enter a class that is in the system.";
+        }
 
         return Double.toString(output);
     }
