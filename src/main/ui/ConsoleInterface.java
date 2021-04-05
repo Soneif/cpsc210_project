@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.EmptyClassListException;
 import exceptions.InvalidClassNameException;
 import model.Grade;
 import model.GradesCalculator;
@@ -214,7 +215,13 @@ public class ConsoleInterface {
      * EFFECTS: Returns the overall average (average of every class' average).
      */
     private String overallAverage() {
-        return Double.toString(gradesCalculator.calculateOverallAverage());
+        String average = null;
+        try {
+            average = gradesCalculator.calculateOverallAverage();
+        } catch (EmptyClassListException e) {
+            e.printStackTrace();
+        }
+        return average;
     }
 
     // EFFECTS: saves the grades(calculator) to file

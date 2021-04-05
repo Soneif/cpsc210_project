@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.EmptyClassListException;
 import exceptions.InvalidClassNameException;
 import model.Grade;
 import model.GradesCalculator;
@@ -214,7 +215,13 @@ public class InputPanel extends JPanel implements ActionListener {
      * EFFECTS: Returns the overall average (average of every class' average).
      */
     private String overallAverage() {
-        return "Overall average: " + gradesCalculator.calculateOverallAverage();
+        String average = null;
+        try {
+            average = "Overall average: " + gradesCalculator.calculateOverallAverage();
+        } catch (EmptyClassListException e) {
+            e.printStackTrace();
+        }
+        return average;
     }
 
     // EFFECTS: generates a graph and makes a new JFrame to place the graph in, returns output message
