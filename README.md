@@ -12,3 +12,7 @@
 - Calculate my overall average
 - Save my grades to file
 - Load my grades from file
+
+
+Phase 4: Task 2
+Tested and designed a class in the model package that is robust.

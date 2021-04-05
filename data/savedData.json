@@ -2,11 +2,6 @@
     "grades": [
         {
             "className": "MATH 101",
-            "assignmentName": "Homework 2",
-            "mark": 50
-        },
-        {
-            "className": "MATH 101",
             "assignmentName": "Homework 1",
             "mark": 75
         },
@@ -39,6 +34,11 @@
             "className": "CPSC 210",
             "assignmentName": "Project 2",
             "mark": 90
+        },
+        {
+            "className": "CPSC 210",
+            "assignmentName": "Project Phase 3",
+            "mark": 80
         }
     ],
     "user": "Sophia"
