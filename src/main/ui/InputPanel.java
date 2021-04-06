@@ -233,6 +233,8 @@ public class InputPanel extends JPanel implements ActionListener {
             average = "Overall average: " + gradesCalculator.calculateOverallAverage();
         } catch (EmptyClassListException e) {
             return "Please enter some grades first before trying to calculate an overall average!";
+        } catch (InvalidClassNameException e) {
+            return "Something went wrong...";
         }
         return average;
     }
