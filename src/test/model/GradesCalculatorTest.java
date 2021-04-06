@@ -233,6 +233,8 @@ class GradesCalculatorTest {
             assertEquals(Double.toString((eoscAverage + cpscAverage + mathAverage) / 3), calc.calculateOverallAverage());
         } catch (EmptyClassListException e) {
             fail("Exception should not have been thrown");
+        } catch (InvalidClassNameException e) {
+            fail("Exception should not have been thrown");
         }
     }
 
@@ -377,6 +379,8 @@ class GradesCalculatorTest {
             fail("Should have thrown exception.");
         } catch (EmptyClassListException e) {
             // This is expected
+        } catch (InvalidClassNameException e) {
+            fail("This exception should not have been thrown");
         }
     }
 
