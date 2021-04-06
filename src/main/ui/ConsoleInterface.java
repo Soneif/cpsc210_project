@@ -233,6 +233,8 @@ public class ConsoleInterface {
             average = gradesCalculator.calculateOverallAverage();
         } catch (EmptyClassListException e) {
             e.printStackTrace();
+        } catch (InvalidClassNameException e) {
+            e.printStackTrace();
         }
         return average;
     }

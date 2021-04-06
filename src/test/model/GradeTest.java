@@ -4,16 +4,24 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 // Test class for Grade
 
 class GradeTest {
 
     Grade grade;
+    Grade grade2;
 
     @BeforeEach
     void initialize() {
         grade = new Grade(50.7, "Lab 2", "CPSC 210");
+        grade = new Grade(96, "Lab 3", "CPSC 210");
+    }
+
+    @Test
+    void notEqualGrades() {
+        assertFalse(grade.equals(grade2));
     }
 
     @Test

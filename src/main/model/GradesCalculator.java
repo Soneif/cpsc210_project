@@ -125,7 +125,7 @@ public class GradesCalculator implements Writable {
     /*
      * EFFECTS: Calculates the overall average by taking the mean of every class' average.
      */
-    public String calculateOverallAverage() throws EmptyClassListException {
+    public String calculateOverallAverage() throws EmptyClassListException, InvalidClassNameException {
         if (classes.size() == 0) {
             throw new EmptyClassListException();
         }
@@ -134,11 +134,7 @@ public class GradesCalculator implements Writable {
         int n = 0;
 
         for (String className : classes) {
-            try {
-                sum += calculateClassAverage(className);
-            } catch (InvalidClassNameException e) {
-                return "Please insert some grades first!";
-            }
+            sum += calculateClassAverage(className);
             n++;
         }
 

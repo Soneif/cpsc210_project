@@ -100,9 +100,4 @@ public class Grade implements Writable {
                 && Objects.equals(assignmentName, grade.assignmentName)
                 && Objects.equals(className, grade.className);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(mark, assignmentName, className);
-    }
 }
