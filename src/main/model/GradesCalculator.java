@@ -68,7 +68,9 @@ public class GradesCalculator implements Writable {
     /*
      *  MODIFIES: this
      *  EFFECTS: Creates a Grade object using the given inputs and
-     *          adds className to classes if it's not already in classes.
+     *           adds className to classes if it's not already in classes.
+     *           Throws NegativeMarkException if a negative mark is inputted.
+     *           Throws PreExistingGradeException if the grade already existed.
      */
     public void addGrade(Grade grade) throws NegativeMarkException, PreExistingGradeException {
         if (grade.getMark() < 0) {
@@ -88,7 +90,7 @@ public class GradesCalculator implements Writable {
 
     /*
      * MODIFIES: this
-     * EFFECTS: Removes Grade that has the same assignmentName, and className
+     * EFFECTS: Removes Grade that has the same assignmentName, and className.
      */
     public void removeGrade(String assignmentName, String className) {
         Grade toRemove = null;
@@ -104,7 +106,8 @@ public class GradesCalculator implements Writable {
 
 
     /*
-     * EFFECTS: Calculates the average of all grades whose class is className
+     * EFFECTS: Calculates the average of all grades whose class is className.
+     *          Throws InvalidClassNameException if there are no grades with the className.
      */
     public double calculateClassAverage(String className) throws InvalidClassNameException {
         if (!classes.contains(className)) {
@@ -124,6 +127,9 @@ public class GradesCalculator implements Writable {
 
     /*
      * EFFECTS: Calculates the overall average by taking the mean of every class' average.
+     *          Throws EmptyClassListException if there are no grades in this GradesCalculator.
+     *          Throws InvalidClassNameException if there is a class in (the list) classes that
+     *          does not have a grade.
      */
     public String calculateOverallAverage() throws EmptyClassListException, InvalidClassNameException {
         if (classes.size() == 0) {
@@ -143,6 +149,7 @@ public class GradesCalculator implements Writable {
 
     /*
      * EFFECTS: Returns a list of Grade objects whose className matches the inputted class name.
+     *          Throws InvalidClassNameException if the className if there are no grades with className as their class.
      */
     public List<Grade> returnClassGrades(String className) throws InvalidClassNameException {
         if (!classes.contains(className)) {
