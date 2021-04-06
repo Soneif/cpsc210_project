@@ -11,17 +11,18 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 class GradeTest {
 
     Grade grade;
-    Grade grade2;
 
     @BeforeEach
     void initialize() {
         grade = new Grade(50.7, "Lab 2", "CPSC 210");
-        grade = new Grade(96, "Lab 3", "CPSC 210");
     }
 
     @Test
-    void notEqualGrades() {
-        assertFalse(grade.equals(grade2));
+    void testAllEqualBranches() {
+        assertFalse(grade.equals(new Grade(96, "Lab 3", "CPSC 210")));
+        assertFalse(grade.equals(""));
+        assertFalse(grade.equals(new Grade(50.7, "Lab 3", "CPSC 210")));
+        assertFalse(grade.equals(new Grade(50.7, "Lab 2", "MATH 101")));
     }
 
     @Test
