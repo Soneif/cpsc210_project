@@ -20,9 +20,10 @@ class GradeTest {
     @Test
     void testAllEqualBranches() {
         assertFalse(grade.equals(new Grade(96, "Lab 3", "CPSC 210")));
-        assertFalse(grade.equals(""));
         assertFalse(grade.equals(new Grade(50.7, "Lab 3", "CPSC 210")));
         assertFalse(grade.equals(new Grade(50.7, "Lab 2", "MATH 101")));
+        assertFalse(grade.equals(""));
+        assertFalse(grade.equals(null));
     }
 
     @Test
