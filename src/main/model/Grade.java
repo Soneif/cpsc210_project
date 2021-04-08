@@ -78,6 +78,7 @@ public class Grade implements Writable {
         return "Class: " + this.className + "\n Assignment: " + this.assignmentName + "\n Mark: " + this.mark;
     }
 
+    // EFFECTS: Outputs this Grade as a JSONObject.
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -87,6 +88,7 @@ public class Grade implements Writable {
         return json;
     }
 
+    // EFFECTS: Return whether the Grade inputted is equal or not.
     @Override
     public boolean equals(Object o) {
         if (this == o) {
